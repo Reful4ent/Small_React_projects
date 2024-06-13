@@ -5,7 +5,7 @@ import { useState } from 'react'
 
 
 
-export default function Field() {
+export default function Game() {
     const [rowsCount, setRowsCount] = useState(5);
     const [columnsCount, setColumnsCount] = useState(5);
     const [field, setField] = useState(Array(rowsCount * columnsCount).fill(false));
@@ -17,11 +17,11 @@ export default function Field() {
     }
 
     function handleStartClick() {
-        console.log(field);
+        //console.log(field);
     }
 
     function handleRowsChanged(e){
-        if(e.target.value<5) {
+        if(e.target.value < 5) {
             setRowsCount(5);
             setField(Array(5 * columnsCount).fill(false));
             return;
@@ -31,66 +31,30 @@ export default function Field() {
             return;
         }
         setRowsCount(e.target.value);
+        setField(Array(e.target.value * columnsCount).fill(false));
     }
 
 
     function handleColumnsChanged(e){
-        if(e.target.value<5) {
+        if(e.target.value < 5) {
             setColumnsCount(5);
-            CreateNewField();
+            setField(Array(rowsCount * 5).fill(false));
             return;
         } else if (e.target.value > 50) {
             setColumnsCount(50);
-            CreateNewField();
+            setField(Array(rowsCount * 50).fill(false));
             return;
         }
         setColumnsCount(e.target.value);
-        CreateNewField();
+        setField(Array(rowsCount * e.target.value).fill(false));
     }
 
-    function CreateNewField(){
-        setField(Array(rowsCount * columnsCount).fill(false));
-    }
 
     return(
         <>
             <div className="game">
                 <div className="game__game-field">
-                    <div className="game-field__row">
-                        <Cell state={field[0]} onCellClick={() => handleCellClick(0)}></Cell>
-                        <Cell state={field[1]} onCellClick={() => handleCellClick(1)}></Cell>
-                        <Cell state={field[2]} onCellClick={() => handleCellClick(2)}></Cell>
-                        <Cell state={field[3]} onCellClick={() => handleCellClick(3)}></Cell>
-                        <Cell state={field[4]} onCellClick={() => handleCellClick(4)}></Cell>
-                    </div>
-                    <div className="game-field__row">
-                        <Cell state={field[5]} onCellClick={() => handleCellClick(5)}></Cell>
-                        <Cell state={field[6]} onCellClick={() => handleCellClick(6)}></Cell>
-                        <Cell state={field[7]} onCellClick={() => handleCellClick(7)}></Cell>
-                        <Cell state={field[8]} onCellClick={() => handleCellClick(8)}></Cell>
-                        <Cell state={field[9]} onCellClick={() => handleCellClick(9)}></Cell>
-                    </div>
-                    <div className="game-field__row">
-                        <Cell state={field[10]} onCellClick={() => handleCellClick(10)}></Cell>
-                        <Cell state={field[11]} onCellClick={() => handleCellClick(11)}></Cell>
-                        <Cell state={field[12]} onCellClick={() => handleCellClick(12)}></Cell>
-                        <Cell state={field[13]} onCellClick={() => handleCellClick(13)}></Cell>
-                        <Cell state={field[14]} onCellClick={() => handleCellClick(14)}></Cell>
-                    </div>
-                    <div className="game-field__row">
-                        <Cell state={field[15]} onCellClick={() => handleCellClick(15)}></Cell>
-                        <Cell state={field[16]} onCellClick={() => handleCellClick(16)}></Cell>
-                        <Cell state={field[17]} onCellClick={() => handleCellClick(17)}></Cell>
-                        <Cell state={field[18]} onCellClick={() => handleCellClick(18)}></Cell>
-                        <Cell state={field[19]} onCellClick={() => handleCellClick(19)}></Cell>
-                    </div>
-                    <div className="game-field__row">
-                        <Cell state={field[20]} onCellClick={() => handleCellClick(20)}></Cell>
-                        <Cell state={field[21]} onCellClick={() => handleCellClick(21)}></Cell>
-                        <Cell state={field[22]} onCellClick={() => handleCellClick(22)}></Cell>
-                        <Cell state={field[23]} onCellClick={() => handleCellClick(23)}></Cell>
-                        <Cell state={field[24]} onCellClick={() => handleCellClick(24)}></Cell>
-                    </div>
+                    <Field field={field} rows={rowsCount} columns={columnsCount} onCellClick={handleCellClick}></Field>
                 </div>
                 <div className="game__game-settings">
                     <button className="game-settings__start" onClick={handleStartClick}>Начать игру</button>
@@ -115,5 +79,27 @@ function Cell({state, onCellClick}) {
     let value = state ? "row__cell--Alive" : "row__cell--Dead";
     return (
         <button className={value} onClick={onCellClick} value={state}></button>
+    )
+}
+
+// eslint-disable-next-line react/prop-types
+function Field({field, rows, columns, onCellClick}){
+    let columnElements = Array(columns);
+    let rowsElements = Array(rows);
+
+
+    for(let i = 0; i < rows; i++) {
+        for(let j = 0; j < columns; j++) {
+            columnElements[j] = <Cell state={field[i]} onCellClick={() =>onCellClick(i)}></Cell>
+            if(j === columns-1){
+                rowsElements[i] = <div className="game-field__row">{columnElements}</div>;
+            }
+        }
+    }
+
+    return(
+        <>
+            {rowsElements}
+        </>
     )
 }
