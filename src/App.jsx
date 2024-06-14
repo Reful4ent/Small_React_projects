@@ -1,8 +1,5 @@
 import './App.css'
-import { useState } from 'react'
-
-
-
+import {useState} from 'react'
 
 
 export default function Game() {
@@ -17,11 +14,82 @@ export default function Game() {
     }
 
     function handleStartClick() {
-        //console.log(field);
+        const tempField = field.slice();
+        const fieldForChange = field.slice();
+        for (let i = 0; i < rowsCount; i++) {
+            for (let j = 0; j < columnsCount; j++) {
+                let countNeighbour = 0;
+                if (i === 0 && j === 0) {
+                    countNeighbour += tempField[i * columnsCount + (j + 1)];
+                    countNeighbour += tempField[((i + 1) * columnsCount) + (j + 1)];
+                    countNeighbour += tempField[((i + 1) * columnsCount) + j];
+
+                } else if (i === 0 && j === rowsCount - 1) {
+                    countNeighbour += tempField[i * columnsCount + (j - 1)];
+                    countNeighbour += tempField[((i+ 1) * columnsCount) + j];
+                    countNeighbour += tempField[((i+ 1) * columnsCount) + (j - 1)];
+
+                } else if (i === columnsCount - 1 && j === 0) {
+                    countNeighbour += tempField[i * columnsCount + (j + 1)];
+                    countNeighbour += tempField[((i- 1) * columnsCount) + j];
+                    countNeighbour += tempField[((i- 1) * columnsCount) + (j + 1)];
+
+                } else if (i === columnsCount - 1 && j === rowsCount - 1) {
+                    countNeighbour += tempField[i * columnsCount + (j - 1)];
+                    countNeighbour += tempField[((i- 1) * columnsCount) + j];
+                    countNeighbour += tempField[((i- 1) * columnsCount) + (j - 1)];
+
+                } else if ((i !== 0 || i !== columnsCount - 1) && j === 0) {
+                    countNeighbour += tempField[((i- 1) * columnsCount) + j];
+                    countNeighbour += tempField[((i- 1)* columnsCount) + (j + 1)];
+                    countNeighbour += tempField[i * columnsCount + (j + 1)];
+                    countNeighbour += tempField[((i+ 1) * columnsCount) + j];
+                    countNeighbour += tempField[((i+ 1) * columnsCount) + (j + 1)];
+
+                } else if ((i !== 0 || i !== columnsCount - 1) && j === rowsCount - 1) {
+                    countNeighbour += tempField[((i- 1)* columnsCount) + (j - 1)];
+                    countNeighbour += tempField[((i- 1) * columnsCount) + j];
+                    countNeighbour += tempField[i * columnsCount + (j - 1)];
+                    countNeighbour += tempField[((i+ 1)* columnsCount) + (j - 1)];
+                    countNeighbour += tempField[((i+ 1)* columnsCount) + j];
+
+                } else if (i === 0 && (j !== 0 || j !== rowsCount - 1)) {
+                    countNeighbour += tempField[i * columnsCount + (j - 1)];
+                    countNeighbour += tempField[i * columnsCount + (j + 1)];
+                    countNeighbour += tempField[((i+ 1) * columnsCount) + (j - 1)];
+                    countNeighbour += tempField[((i+ 1) * columnsCount) + j];
+                    countNeighbour += tempField[((i+ 1) * columnsCount) + (j + 1)];
+
+                } else if (i === columnsCount - 1 && (j !== 0 || j !== rowsCount - 1)) {
+                    countNeighbour += tempField[((i- 1) * columnsCount) + (j - 1)];
+                    countNeighbour += tempField[((i- 1) * columnsCount) + j];
+                    countNeighbour += tempField[((i- 1) * columnsCount) + (j + 1)];
+                    countNeighbour += tempField[i * columnsCount + (j - 1)];
+                    countNeighbour += tempField[i * columnsCount + (j + 1)];
+
+                } else {
+                    countNeighbour += tempField[((i- 1) * columnsCount) + (j - 1)];
+                    countNeighbour += tempField[((i- 1) * columnsCount) + j];
+                    countNeighbour += tempField[((i- 1) * columnsCount) + (j + 1)];
+                    countNeighbour += tempField[i * columnsCount + (j - 1)];
+                    countNeighbour += tempField[i * columnsCount + (j + 1)];
+                    countNeighbour += tempField[((i+ 1) * columnsCount) + (j - 1)];
+                    countNeighbour += tempField[((i+ 1) * columnsCount) + j];
+                    countNeighbour += tempField[((i+ 1) * columnsCount) + (j + 1)];
+
+                }
+                if ((tempField[i * columnsCount + j] === false) && (countNeighbour === 3)) {
+                    fieldForChange[i * columnsCount + j] = true;
+                } else if (countNeighbour < 2 || countNeighbour > 3) {
+                    fieldForChange[i * columnsCount + j] = false;
+                }
+            }
+        }
+        setField(fieldForChange);
     }
 
-    function handleRowsChanged(e){
-        if(e.target.value < 5) {
+    function handleRowsChanged(e) {
+        if (e.target.value < 5) {
             setRowsCount(5);
             setField(Array(5 * columnsCount).fill(false));
             return;
@@ -35,8 +103,8 @@ export default function Game() {
     }
 
 
-    function handleColumnsChanged(e){
-        if(e.target.value < 5) {
+    function handleColumnsChanged(e) {
+        if (e.target.value < 5) {
             setColumnsCount(5);
             setField(Array(rowsCount * 5).fill(false));
             return;
@@ -50,7 +118,7 @@ export default function Game() {
     }
 
 
-    return(
+    return (
         <>
             <div className="game">
                 <div className="game__game-field">
@@ -83,20 +151,21 @@ function Cell({state, onCellClick}) {
 }
 
 // eslint-disable-next-line react/prop-types
-function Field({field, rows, columns, onCellClick}){
+function Field({field, rows, columns, onCellClick}) {
     let rowsElements = Array(rows);
 
-    for(let i = 0; i < rows; i++) {
+    for (let i = 0; i < rows; i++) {
         let columnElements = Array(columns);
-        for(let j = 0; j < columns; j++) {
-            columnElements[j] = <Cell state={field[i * columns + j]} onCellClick={() =>onCellClick(i * columns + j)}></Cell>
-            if(j === columns - 1) {
+        for (let j = 0; j < columns; j++) {
+            columnElements[j] =
+                <Cell state={field[i * columns + j]} onCellClick={() => onCellClick(i * columns + j)}></Cell>
+            if (j === columns - 1) {
                 rowsElements[i] = <div className="game-field__row">{columnElements}</div>;
             }
         }
     }
 
-    return(
+    return (
         <>
             {rowsElements}
         </>
