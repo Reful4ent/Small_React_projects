@@ -78,13 +78,13 @@ ul {
   float: left;
   font-size: 24px;
   font-weight: bold;
-  line-height: 3px;
-  height: 3px;
+  line-height: 1px;
+  height: 5px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 3px;
+  width: 5px;
   color: #1a1a1a;
   min-width: 1px;
   min-height: 1px;
@@ -96,17 +96,19 @@ ul {
   float: left;
   font-size: 24px;
   font-weight: bold;
-  line-height: 3px;
-  height: 3px;
+  line-height: 1px;
+  height: 5px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 3px;
+  width: 5px;
   color: #1a1a1a;
   min-width: 1px;
   min-height: 1px;
 }
+
+
 
 .game__game-settings{
   display: flex;

@@ -3,19 +3,19 @@ import {useEffect, useState} from 'react'
 
 
 export default function Game() {
-    const [rowsCount, setRowsCount] = useState(50);
-    const [columnsCount, setColumnsCount] = useState(50);
-    const [field, setField] = useState(Array(rowsCount * columnsCount).fill(false));
+    const [sizeField, setSizeField] = useState(50);
+    const [field, setField] = useState(Array(sizeField * sizeField).fill(false));
     const [isPlaying, setIsPlaying] = useState(false);
+    const [speedGame, setSpeedGame] = useState(250);
 
 
-    useEffect(()=>{
-        if(!isPlaying) {
+    useEffect(() => {
+        if (!isPlaying) {
             return;
         }
-        const  ticking = setInterval(nextStep,100);
+        const ticking = setInterval(nextStep, speedGame);
         return () => clearInterval(ticking);
-    },[isPlaying,nextStep])
+    }, [isPlaying, nextStep, speedGame])
 
     function handleCellClick(num) {
         const tempField = field.slice();
@@ -24,97 +24,105 @@ export default function Game() {
     }
 
     function handleStartClick() {
-        if(!isPlaying) {
+        if (!isPlaying) {
             setIsPlaying(true);
             return;
         }
         setIsPlaying(false);
     }
 
-    function handleRowsChanged(e) {
+
+    function handleSizeChanged(e) {
+        if (isPlaying)
+            setIsPlaying(!isPlaying);
         if (e.target.value < 5) {
-            setRowsCount(5);
-            setField(Array(5 * columnsCount).fill(false));
+            setSizeField(5);
+            setField(Array(5 * 5).fill(false));
             return;
         } else if (e.target.value > 50) {
-            setRowsCount(50);
-            setField(Array(50 * columnsCount).fill(false));
+            setSizeField(50);
+            setField(Array(50 * 50).fill(false));
             return;
         }
-        setRowsCount(e.target.value);
-        setField(Array(e.target.value * columnsCount).fill(false));
+        setSizeField(e.target.value);
+        setField(Array(e.target.value * e.target.value).fill(false));
     }
 
-    function nextStep(){
-        console.log(field);
+    function handleResetClick() {
+        if (isPlaying)
+            setIsPlaying(!isPlaying);
+        setSpeedGame(250);
+        setField(Array(sizeField * sizeField).fill(false));
+    }
+
+    function nextStep() {
         const tempField = field.slice();
         const fieldForChange = field.slice();
-        for (let i = 0; i < rowsCount; i++) {
-            for (let j = 0; j < columnsCount; j++) {
+        for (let i = 0; i < sizeField; i++) {
+            for (let j = 0; j < sizeField; j++) {
                 let countNeighbour = 0;
                 if (i === 0 && j === 0) {
-                    countNeighbour += tempField[i * columnsCount + (j + 1)];
-                    countNeighbour += tempField[((i + 1) * columnsCount) + (j + 1)];
-                    countNeighbour += tempField[((i + 1) * columnsCount) + j];
+                    countNeighbour += tempField[i * sizeField + (j + 1)];
+                    countNeighbour += tempField[((i + 1) * sizeField) + (j + 1)];
+                    countNeighbour += tempField[((i + 1) * sizeField) + j];
 
-                } else if (i === 0 && j === rowsCount - 1) {
-                    countNeighbour += tempField[i * columnsCount + (j - 1)];
-                    countNeighbour += tempField[((i+ 1) * columnsCount) + j];
-                    countNeighbour += tempField[((i+ 1) * columnsCount) + (j - 1)];
+                } else if (i === 0 && j === sizeField - 1) {
+                    countNeighbour += tempField[i * sizeField + (j - 1)];
+                    countNeighbour += tempField[((i + 1) * sizeField) + j];
+                    countNeighbour += tempField[((i + 1) * sizeField) + (j - 1)];
 
-                } else if (i === columnsCount - 1 && j === 0) {
-                    countNeighbour += tempField[i * columnsCount + (j + 1)];
-                    countNeighbour += tempField[((i- 1) * columnsCount) + j];
-                    countNeighbour += tempField[((i- 1) * columnsCount) + (j + 1)];
+                } else if (i === sizeField - 1 && j === 0) {
+                    countNeighbour += tempField[i * sizeField + (j + 1)];
+                    countNeighbour += tempField[((i - 1) * sizeField) + j];
+                    countNeighbour += tempField[((i - 1) * sizeField) + (j + 1)];
 
-                } else if (i === columnsCount - 1 && j === rowsCount - 1) {
-                    countNeighbour += tempField[i * columnsCount + (j - 1)];
-                    countNeighbour += tempField[((i- 1) * columnsCount) + j];
-                    countNeighbour += tempField[((i- 1) * columnsCount) + (j - 1)];
+                } else if (i === sizeField - 1 && j === sizeField - 1) {
+                    countNeighbour += tempField[i * sizeField + (j - 1)];
+                    countNeighbour += tempField[((i - 1) * sizeField) + j];
+                    countNeighbour += tempField[((i - 1) * sizeField) + (j - 1)];
 
-                } else if ((i !== 0 || i !== columnsCount - 1) && j === 0) {
-                    countNeighbour += tempField[((i- 1) * columnsCount) + j];
-                    countNeighbour += tempField[((i- 1)* columnsCount) + (j + 1)];
-                    countNeighbour += tempField[i * columnsCount + (j + 1)];
-                    countNeighbour += tempField[((i+ 1) * columnsCount) + j];
-                    countNeighbour += tempField[((i+ 1) * columnsCount) + (j + 1)];
+                } else if ((i !== 0 || i !== sizeField - 1) && j === 0) {
+                    countNeighbour += tempField[((i - 1) * sizeField) + j];
+                    countNeighbour += tempField[((i - 1) * sizeField) + (j + 1)];
+                    countNeighbour += tempField[i * sizeField + (j + 1)];
+                    countNeighbour += tempField[((i + 1) * sizeField) + j];
+                    countNeighbour += tempField[((i + 1) * sizeField) + (j + 1)];
 
-                } else if ((i !== 0 || i !== columnsCount - 1) && j === rowsCount - 1) {
-                    countNeighbour += tempField[((i- 1)* columnsCount) + (j - 1)];
-                    countNeighbour += tempField[((i- 1) * columnsCount) + j];
-                    countNeighbour += tempField[i * columnsCount + (j - 1)];
-                    countNeighbour += tempField[((i+ 1)* columnsCount) + (j - 1)];
-                    countNeighbour += tempField[((i+ 1)* columnsCount) + j];
+                } else if ((i !== 0 || i !== sizeField - 1) && j === sizeField - 1) {
+                    countNeighbour += tempField[((i - 1) * sizeField) + (j - 1)];
+                    countNeighbour += tempField[((i - 1) * sizeField) + j];
+                    countNeighbour += tempField[i * sizeField + (j - 1)];
+                    countNeighbour += tempField[((i + 1) * sizeField) + (j - 1)];
+                    countNeighbour += tempField[((i + 1) * sizeField) + j];
 
-                } else if (i === 0 && (j !== 0 || j !== rowsCount - 1)) {
-                    countNeighbour += tempField[i * columnsCount + (j - 1)];
-                    countNeighbour += tempField[i * columnsCount + (j + 1)];
-                    countNeighbour += tempField[((i+ 1) * columnsCount) + (j - 1)];
-                    countNeighbour += tempField[((i+ 1) * columnsCount) + j];
-                    countNeighbour += tempField[((i+ 1) * columnsCount) + (j + 1)];
+                } else if (i === 0 && (j !== 0 || j !== sizeField - 1)) {
+                    countNeighbour += tempField[i * sizeField + (j - 1)];
+                    countNeighbour += tempField[i * sizeField + (j + 1)];
+                    countNeighbour += tempField[((i + 1) * sizeField) + (j - 1)];
+                    countNeighbour += tempField[((i + 1) * sizeField) + j];
+                    countNeighbour += tempField[((i + 1) * sizeField) + (j + 1)];
 
-                } else if (i === columnsCount - 1 && (j !== 0 || j !== rowsCount - 1)) {
-                    countNeighbour += tempField[((i- 1) * columnsCount) + (j - 1)];
-                    countNeighbour += tempField[((i- 1) * columnsCount) + j];
-                    countNeighbour += tempField[((i- 1) * columnsCount) + (j + 1)];
-                    countNeighbour += tempField[i * columnsCount + (j - 1)];
-                    countNeighbour += tempField[i * columnsCount + (j + 1)];
+                } else if (i === sizeField - 1 && (j !== 0 || j !== sizeField - 1)) {
+                    countNeighbour += tempField[((i - 1) * sizeField) + (j - 1)];
+                    countNeighbour += tempField[((i - 1) * sizeField) + j];
+                    countNeighbour += tempField[((i - 1) * sizeField) + (j + 1)];
+                    countNeighbour += tempField[i * sizeField + (j - 1)];
+                    countNeighbour += tempField[i * sizeField + (j + 1)];
 
                 } else {
-                    countNeighbour += tempField[((i- 1) * columnsCount) + (j - 1)];
-                    countNeighbour += tempField[((i- 1) * columnsCount) + j];
-                    countNeighbour += tempField[((i- 1) * columnsCount) + (j + 1)];
-                    countNeighbour += tempField[i * columnsCount + (j - 1)];
-                    countNeighbour += tempField[i * columnsCount + (j + 1)];
-                    countNeighbour += tempField[((i+ 1) * columnsCount) + (j - 1)];
-                    countNeighbour += tempField[((i+ 1) * columnsCount) + j];
-                    countNeighbour += tempField[((i+ 1) * columnsCount) + (j + 1)];
-
+                    countNeighbour += tempField[((i - 1) * sizeField) + (j - 1)];
+                    countNeighbour += tempField[((i - 1) * sizeField) + j];
+                    countNeighbour += tempField[((i - 1) * sizeField) + (j + 1)];
+                    countNeighbour += tempField[i * sizeField + (j - 1)];
+                    countNeighbour += tempField[i * sizeField + (j + 1)];
+                    countNeighbour += tempField[((i + 1) * sizeField) + (j - 1)];
+                    countNeighbour += tempField[((i + 1) * sizeField) + j];
+                    countNeighbour += tempField[((i + 1) * sizeField) + (j + 1)];
                 }
-                if ((tempField[i * columnsCount + j] === false) && (countNeighbour === 3)) {
-                    fieldForChange[i * columnsCount + j] = true;
+                if ((tempField[i * sizeField + j] === false) && (countNeighbour === 3)) {
+                    fieldForChange[i * sizeField + j] = true;
                 } else if (countNeighbour < 2 || countNeighbour > 3) {
-                    fieldForChange[i * columnsCount + j] = false;
+                    fieldForChange[i * sizeField + j] = false;
                 }
             }
         }
@@ -122,38 +130,24 @@ export default function Game() {
     }
 
 
-    function handleColumnsChanged(e) {
-        if (e.target.value < 5) {
-            setColumnsCount(5);
-            setField(Array(rowsCount * 5).fill(false));
-            return;
-        } else if (e.target.value > 50) {
-            setColumnsCount(50);
-            setField(Array(rowsCount * 50).fill(false));
-            return;
-        }
-        setColumnsCount(e.target.value);
-        setField(Array(rowsCount * e.target.value).fill(false));
-    }
-
 
     return (
         <>
             <div className="game">
                 <div className="game__game-field">
-                    <Field field={field} rows={rowsCount} columns={columnsCount} onCellClick={handleCellClick}></Field>
+                    <Field field={field} rows={sizeField} columns={sizeField} onCellClick={handleCellClick}></Field>
                 </div>
                 <div className="game__game-settings">
                     <button className="game-settings__start" onClick={handleStartClick}>Начать игру</button>
+                    <button className="game-settings__reset" onClick={handleResetClick}>Запустить заново</button>
                     <div className="game-settings__set-field">
-                        <div className="set-field__rows-count">
-                            <text className="count-text">Количество строк:</text>
-                            <input type="number" value={rowsCount} onChange={handleRowsChanged}/>
+                        <div className="set-field__size">
+                            <text className="count-text">размер сетки {sizeField}:{sizeField}</text>
+                            <input type="range" min={5} max={50} value={sizeField} onChange={handleSizeChanged}/>
                         </div>
-                        <div className="set-field__columns-count">
-                            <text className="count-text">Количество столбцов:</text>
-                            <input type="number" value={columnsCount} onChange={handleColumnsChanged}/>
-                        </div>
+                        <input type="range" min={20} max={500} value={speedGame} onChange={e => {
+                            setSpeedGame(e.target.value)
+                        }}/>
                     </div>
                 </div>
             </div>
