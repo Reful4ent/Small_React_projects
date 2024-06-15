@@ -1,11 +1,21 @@
 import './App.css'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 
 
 export default function Game() {
-    const [rowsCount, setRowsCount] = useState(5);
-    const [columnsCount, setColumnsCount] = useState(5);
+    const [rowsCount, setRowsCount] = useState(50);
+    const [columnsCount, setColumnsCount] = useState(50);
     const [field, setField] = useState(Array(rowsCount * columnsCount).fill(false));
+    const [isPlaying, setIsPlaying] = useState(false);
+
+
+    useEffect(()=>{
+        if(!isPlaying) {
+            return;
+        }
+        const  ticking = setInterval(nextStep,100);
+        return () => clearInterval(ticking);
+    },[isPlaying,nextStep])
 
     function handleCellClick(num) {
         const tempField = field.slice();
@@ -14,6 +24,29 @@ export default function Game() {
     }
 
     function handleStartClick() {
+        if(!isPlaying) {
+            setIsPlaying(true);
+            return;
+        }
+        setIsPlaying(false);
+    }
+
+    function handleRowsChanged(e) {
+        if (e.target.value < 5) {
+            setRowsCount(5);
+            setField(Array(5 * columnsCount).fill(false));
+            return;
+        } else if (e.target.value > 50) {
+            setRowsCount(50);
+            setField(Array(50 * columnsCount).fill(false));
+            return;
+        }
+        setRowsCount(e.target.value);
+        setField(Array(e.target.value * columnsCount).fill(false));
+    }
+
+    function nextStep(){
+        console.log(field);
         const tempField = field.slice();
         const fieldForChange = field.slice();
         for (let i = 0; i < rowsCount; i++) {
@@ -86,20 +119,6 @@ export default function Game() {
             }
         }
         setField(fieldForChange);
-    }
-
-    function handleRowsChanged(e) {
-        if (e.target.value < 5) {
-            setRowsCount(5);
-            setField(Array(5 * columnsCount).fill(false));
-            return;
-        } else if (e.target.value > 50) {
-            setRowsCount(50);
-            setField(Array(50 * columnsCount).fill(false));
-            return;
-        }
-        setRowsCount(e.target.value);
-        setField(Array(e.target.value * columnsCount).fill(false));
     }
 
 

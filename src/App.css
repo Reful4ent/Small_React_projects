@@ -78,14 +78,16 @@ ul {
   float: left;
   font-size: 24px;
   font-weight: bold;
-  line-height: 34px;
-  height: 34px;
+  line-height: 3px;
+  height: 3px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 34px;
+  width: 3px;
   color: #1a1a1a;
+  min-width: 1px;
+  min-height: 1px;
 }
 
 .row__cell--Dead {
@@ -94,14 +96,16 @@ ul {
   float: left;
   font-size: 24px;
   font-weight: bold;
-  line-height: 34px;
-  height: 34px;
+  line-height: 3px;
+  height: 3px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 34px;
+  width: 3px;
   color: #1a1a1a;
+  min-width: 1px;
+  min-height: 1px;
 }
 
 .game__game-settings{
@@ -113,4 +117,9 @@ ul {
   height: 20px;
   width: 180px;
   margin: 10px;
+}
+
+.game__game-field{
+  max-width: 600px;
+  max-height: 600px;
 }
