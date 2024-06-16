@@ -1,9 +1,20 @@
+@font-face {
+  font-family: 'Tiny5';
+  src: local('Tiny5'),
+  url('/public/Fonts/Tiny5/Tiny5-Regular.woff2') format('woff2'),
+  url('/public/Fonts/Tiny5/Tiny5-Regular.woff') format('woff'),
+  url('/public/Fonts/Tiny5/Tiny5-Regular.ttf') format('ttf'),
+  url('/public/Fonts/Tiny5/Tiny5-Regular.eot') format('eot');
+}
+
+
 * {
   box-sizing: border-box;
 }
 
 html{
   height: 100%;
+  width: 100%;
 }
 body {
   font-family: sans-serif;
@@ -15,60 +26,64 @@ body {
   align-items: center;
 }
 
-h1 {
-  margin-top: 0;
-  font-size: 22px;
+#root {
+  height: 100%;
+  width: 100%;
 }
 
-h2 {
-  margin-top: 0;
-  font-size: 20px;
+.header {
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Tiny5;
+  min-height: 30px;
+  font-size: 24px;
 }
 
-h3 {
-  margin-top: 0;
-  font-size: 18px;
+.root {
+  display: grid;
 }
 
-h4 {
-  margin-top: 0;
-  font-size: 16px;
-}
-
-h5 {
-  margin-top: 0;
-  font-size: 14px;
-}
-
-h6 {
-  margin-top: 0;
-  font-size: 12px;
-}
-
-code {
-  font-size: 1.2em;
-}
-
-ul {
-  padding-inline-start: 20px;
-}
-
-.board-row:after {
-  clear: both;
-  content: '';
-  display: table;
-}
-
-.status {
-  margin-bottom: 10px;
-}
 .game {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .game-info {
   margin-left: 20px;
+}
+
+.game__game-settings{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.game-settings__start, .game-settings__reset {
+  height: 20px;
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2.5px;
+}
+
+.start__icon-settings{
+  height: 15px;
+  width: 15px;
+}
+
+.game__game-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-field__row {
+  display: table;
 }
 
 .row__cell--Alive {
@@ -110,18 +125,3 @@ ul {
 
 
 
-.game__game-settings{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.game-settings__start {
-  height: 20px;
-  width: 180px;
-  margin: 10px;
-}
-
-.game__game-field{
-  max-width: 600px;
-  max-height: 600px;
-}

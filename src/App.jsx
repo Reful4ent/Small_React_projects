@@ -133,24 +133,33 @@ export default function Game() {
 
     return (
         <>
-            <div className="game">
-                <div className="game__game-field">
-                    <Field field={field} rows={sizeField} columns={sizeField} onCellClick={handleCellClick}></Field>
-                </div>
-                <div className="game__game-settings">
-                    <button className="game-settings__start" onClick={handleStartClick}>Начать игру</button>
-                    <button className="game-settings__reset" onClick={handleResetClick}>Запустить заново</button>
-                    <div className="game-settings__set-field">
-                        <div className="set-field__size">
-                            <text className="count-text">размер сетки {sizeField}:{sizeField}</text>
-                            <input type="range" min={5} max={50} value={sizeField} onChange={handleSizeChanged}/>
+            <header className="header">Game Of Life</header>
+            <main>
+                <div className="game">
+                    <div className="game__game-settings">
+                        <button className="game-settings__start" onClick={handleStartClick}><IconForPlay isPlaying={isPlaying}></IconForPlay> </button>
+                        <button className="game-settings__reset" onClick={handleResetClick}><img src="/public/Img/restart.svg" className="start__icon-settings"/></button>
+                        <div className="game-settings__set-field">
+                            <div className="set-field__size">
+                                <text className="count-text">размер сетки {sizeField}:{sizeField}</text>
+                                <input type="range" min={5} max={50} value={sizeField} onChange={handleSizeChanged}/>
+                            </div>
+                            <div className="set-field__speed">
+                                <text className="count-text">скорость изменения: </text>
+                                <input type="range" min={10} max={500} value={speedGame} onChange={e => {
+                                    setSpeedGame(e.target.value)
+                                }}/>
+                            </div>
                         </div>
-                        <input type="range" min={20} max={500} value={speedGame} onChange={e => {
-                            setSpeedGame(e.target.value)
-                        }}/>
+                    </div>
+                    <div className="game__game-main">
+                        <div className="game-main__field">
+                            <Field field={field} rows={sizeField} columns={sizeField} onCellClick={handleCellClick}></Field>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </main>
+            <footer className="footer">asdasdasй</footer>
         </>
     );
 }
@@ -181,6 +190,16 @@ function Field({field, rows, columns, onCellClick}) {
     return (
         <>
             {rowsElements}
+        </>
+    )
+}
+
+// eslint-disable-next-line react/prop-types
+function IconForPlay({isPlaying}) {
+    let value = isPlaying ? "/public/Img/player-pause.svg" : "/public/Img/player-play.svg";
+    return(
+        <>
+            <img src={value} className="start__icon-settings" alt="play-pause button"/>
         </>
     )
 }
