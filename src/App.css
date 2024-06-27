@@ -70,19 +70,77 @@ body {
   align-items: center;
 }
 
-
-.game-settings__start, .game-settings__reset {
-  height: 20px;
-  width: 20px;
+.game-settings__game-buttons {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 2.5px;
+}
+
+.game-buttons__start, .game-buttons__step, .game-buttons__reset {
+  height: 25px;
+  width: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0.5px solid #949494;
+}
+
+.game-buttons__step {
+  border-radius: 10px 0px 0px 10px;
+}
+
+.game-buttons__reset {
+  border-radius: 0px 10px 10px 0px;
 }
 
 .start__icon-settings{
   height: 15px;
   width: 15px;
+}
+
+.start__icon-settings-step {
+  height: 10px;
+  width: 10px;
+}
+
+
+
+.header__list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.list__item {
+  float: left;
+  display: inline;
+}
+.options {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 30px;
+  background: transparent;
+  border: 1px solid black;
+}
+.options__menu {
+  height: 15px;
+  width: 15px;
+  fill: #ffffff;
+}
+
+.header-text {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  font-size: 20px;
+  text-align: center;
 }
 
 .game__game-main {
@@ -94,6 +152,18 @@ body {
 .game-field__row {
   display: table;
 }
+
+.game-main__field{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-field__canvas {
+  border: 2px black solid;
+}
+
 
 .row__cell--Alive {
   background: #fff;
