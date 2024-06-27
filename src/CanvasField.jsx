@@ -1,11 +1,11 @@
 import {useEffect, useRef, useState} from "react";
 
 
-export default function CanvasField({isDraw, isPlaying, speedGame}) {
+export default function CanvasField({isDraw, isPlaying, speedGame, sizeField}) {
     const canvasRef = useRef(null);
     const contextRef = useRef(null);
     const [isDown, setIsDown] = useState(false);
-    const [field, setField] = useState(Array(450).fill(false));
+    const [field, setField] = useState(Array((300*150)/(sizeField*sizeField)).fill(false));
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -24,20 +24,20 @@ export default function CanvasField({isDraw, isPlaying, speedGame}) {
         }
         let {offsetX,offsetY} = eventClick.nativeEvent;
 
-        offsetX = Math.floor(offsetX/10);
-        offsetY = Math.floor(offsetY/10);
+        offsetX = Math.floor(offsetX/sizeField);
+        offsetY = Math.floor(offsetY/sizeField);
 
         if( offsetX < 0 ) {
             offsetX = 0;
-        } else if (offsetX >= 30) {
-            offsetX = 30-1;
+        } else if (offsetX >= 300/sizeField) {
+            offsetX = 300/sizeField - 1;
         }
 
 
         setField(field.map((element, index) => {
-            if(index === (offsetY * 30 + offsetX) && isDraw) {
+            if(index === (offsetY * (300/sizeField) + offsetX) && isDraw) {
                 return true;
-            } else if (index === (offsetY * 30 + offsetX) && !isDraw) {
+            } else if (index === (offsetY * (300/sizeField) + offsetX) && !isDraw) {
                 return false;
             } else {
                 return element;
@@ -51,19 +51,21 @@ export default function CanvasField({isDraw, isPlaying, speedGame}) {
     function drawField(){
         const tempContext = contextRef.current;
         tempContext.clearRect(0,0,300,150);
-        for (let i = 0; i < 15; i++) {
-            for (let j = 0; j < 30; j++) {
-                if(field[i * 30 + j] && isDraw) {
-                    tempContext.fillRect(j * 10, i * 10, 10, 10);
-                } else if (field[i * 30 + j] && !isDraw) {
-                    tempContext.clearRect(j * 10, i * 10, 10, 10);
+        for (let i = 0; i < 150/sizeField; i++) {
+            for (let j = 0; j < 300/sizeField; j++) {
+                if(field[i * 300/sizeField + j]) {
+                    tempContext.fillStyle = "black";
+                    tempContext.fillRect(j * sizeField, i * sizeField, sizeField, sizeField);
+                } else  {
+                    tempContext.fillStyle = "white";
+                    tempContext.fillRect(j * sizeField, i * sizeField, sizeField, sizeField);
                 }
             }
         }
     }
 
     function nextStep() {
-        const fieldForChange = countStep(15,30,field.slice(),field.slice());
+        const fieldForChange = countStep(150/sizeField,300/sizeField,field.slice(),field.slice());
         setField(fieldForChange);
         drawField();
     }
@@ -83,7 +85,6 @@ export default function CanvasField({isDraw, isPlaying, speedGame}) {
 
 function countStep(Y, X, tempField, fieldForChange){
     for (let i = 0; i < Y; i++) {
-        console.log(i + "\n");
         for (let j = 0; j < X; j++) {
             let countNeighbour = 0;
             countNeighbour += tempField[getX(j-1,X) + X * getY(i-1,Y)];

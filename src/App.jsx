@@ -1,22 +1,12 @@
 import './App.css'
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import CanvasField from "./CanvasField.jsx";
+import GameButtons from "./GameButtons.jsx";
 export default function Game() {
-    const [sizeField, setSizeField] = useState(50);
+    const [sizeField, setSizeField] = useState(15);
     const [isPlaying, setIsPlaying] = useState(false);
     const [speedGame, setSpeedGame] = useState(250);
-    const [isCycle, setIsCycle] = useState(false);
-
-    useEffect(() => {
-        if (!isPlaying) {
-            return;
-        }
-        const ticking = setInterval(nextStep, speedGame);
-        return () => clearInterval(ticking);
-    }, [isPlaying, nextStep, speedGame])
-
-    const handleCycleClick = () => setIsCycle(!isCycle);
-
+    const [isDraw,setIsDraw] = useState(true);
 
     function handleSizeChanged(e) {
         setSizeField(e.target.value);
@@ -31,6 +21,10 @@ export default function Game() {
         setIsPlaying(false);
     }
 
+    function handleClearClick() {
+        setIsDraw(!isDraw);
+    }
+
     function handleResetClick() {
         if (isPlaying)
             setIsPlaying(!isPlaying);
@@ -39,9 +33,9 @@ export default function Game() {
 
     function handleSteplick() {
         if (!isPlaying) {
+            return;
         }
     }
-
 
     return (
         <>
@@ -56,56 +50,41 @@ export default function Game() {
             </header>
             <main>
                 <div className="game">
-                <div className="game__game-settings">
-                    <div className="game-settings__game-buttons">
-                        <button className="game-buttons__step" onClick={handleSteplick}>
-                            <img src="/public/Img/step-forward.svg" className="start__icon-settings-step"/>
-                        </button>
-                        <button className="game-buttons__start" onClick={handleStartClick}>
-                            <IconForPlay isPlaying={isPlaying}></IconForPlay>
-                        </button>
-                        <button className="game-buttons__reset" onClick={handleResetClick}>
-                            <img src="/public/Img/restart.svg" className="start__icon-settings"/>
-                        </button>
-                    </div>
-                    <div className="game-settings__set-field">
-                        <div className="set-field__size">
-                            <text className="count-text">размер сетки {sizeField}:{sizeField}</text>
-                            <input type="range" className="field_slider" min={5} max={50} value={sizeField} onChange={handleSizeChanged}/>
+                    <div className="game__game-settings">
+                        <div className="game-settings__set-field">
+                            <div className="set-field__size">
+                                <text className="count-text">размер сетки {sizeField}:{sizeField}</text>
+                                <input type="range" className="field_slider" min={5} max={150} value={sizeField}
+                                       onChange={handleSizeChanged}/>
                             </div>
                             <div className="set-field__speed">
                                 <text className="count-text">скорость изменения:</text>
-                                <input type="range" className="field_slider" min={10} max={5000} value={speedGame} onChange={e => {
-                                    setSpeedGame(e.target.value)
-                                }}/>
-                            </div>
-                            <div className="set-field__cycle">
-                                <text className="count-text">цикличность поля:</text>
-                                <input type="checkbox" value={isCycle} onChange={handleCycleClick}/>
+                                <input type="range" className="field_slider" min={10} max={5000} value={speedGame}
+                                       onChange={e => {
+                                           setSpeedGame(e.target.value)
+                                       }}/>
                             </div>
                         </div>
                     </div>
                     <div className="game__game-main">
                         <div className="game-main__field">
-                            <CanvasField isDraw={true} isPlaying={isPlaying} speedGame={speedGame}></CanvasField>
-
+                            <CanvasField isDraw={isDraw}
+                                         isPlaying={isPlaying}
+                                         speedGame={speedGame}
+                                         sizeField={sizeField}></CanvasField>
                         </div>
+                    </div>
+                    <div className="game-settings__game-buttons">
+                        <GameButtons isPlaying={isPlaying}
+                                     isDraw={isDraw}
+                                     handleSteplick={handleSteplick}
+                                     handleResetClick={handleResetClick}
+                                     handleStartClick={handleStartClick}
+                                     handleClearClick={handleClearClick}></GameButtons>
                     </div>
                 </div>
             </main>
             <footer className="footer">asdasdasй</footer>
         </>
     );
-}
-
-
-
-// eslint-disable-next-line react/prop-types
-function IconForPlay({isPlaying}) {
-    let value = isPlaying ? "/public/Img/player-pause.svg" : "/public/Img/player-play.svg";
-    return(
-        <>
-            <img src={value} className="start__icon-settings" alt="play-pause button"/>
-        </>
-    )
 }
