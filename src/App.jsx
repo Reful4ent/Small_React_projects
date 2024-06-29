@@ -2,8 +2,9 @@ import './App.css'
 import {useState} from 'react'
 import CanvasField from "./CanvasField.jsx";
 import GameButtons from "./GameButtons.jsx";
+import SocialLinks from "./SocialLinks.jsx";
 export default function Game() {
-    const [sizeField, setSizeField] = useState(20);
+    const [sizeField, setSizeField] = useState(7);
     const [isPlaying, setIsPlaying] = useState(false);
     const [speedGame, setSpeedGame] = useState(10);
     const [isDraw,setIsDraw] = useState(true);
@@ -68,7 +69,9 @@ export default function Game() {
                     </div>
                 </div>
             </main>
-            <footer className="footer">asdasdasй</footer>
+            <footer className="footer">
+                <SocialLinks></SocialLinks>
+            </footer>
         </>
     );
 }

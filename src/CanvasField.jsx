@@ -54,6 +54,11 @@ export default function CanvasField({isDraw, isPlaying, speedGame, sizeField}) {
         drawField();
     }
 
+    function nextStep() {
+        const fieldForChange = countStep(rows,columns,field.slice(),field.slice());
+        setField(fieldForChange);
+        drawField();
+    }
 
     function drawField(){
         const tempContext = contextRef.current;
@@ -72,14 +77,7 @@ export default function CanvasField({isDraw, isPlaying, speedGame, sizeField}) {
 
     }
 
-    function nextStep() {
-        const fieldForChange = countStep(rows,columns,field.slice(),field.slice());
-        setField(fieldForChange);
-        drawField();
-    }
-
     const resizeBoard =  useCallback(() => {
-        console.log((window.innerWidth-40) + " " + (window.innerHeight-200));
         setWidthCanvas(window.innerWidth-40);
         setHeightCanvas(window.innerHeight-200)
         columns = Math.floor((window.innerWidth-40)/sizeField);
@@ -87,6 +85,12 @@ export default function CanvasField({isDraw, isPlaying, speedGame, sizeField}) {
         setField(Array((rows*columns)).fill(false))
     },[]);
 
+    function drawGrid() {
+        const canvas = canvasRef.current;
+        const context = canvas.getContext("2d");
+        contextRef.current = context;
+        return canvas.toDataURL();
+    }
 
     return (
         <>
@@ -103,22 +107,22 @@ export default function CanvasField({isDraw, isPlaying, speedGame, sizeField}) {
 }
 
 
-function countStep(Y, X, tempField, fieldForChange){
-    for (let i = 0; i < Y; i++) {
-        for (let j = 0; j < X; j++) {
+function countStep(rows, columns, tempField, fieldForChange){
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < columns; j++) {
             let countNeighbour = 0;
-            countNeighbour += tempField[getX(j-1,X) + X * getY(i-1,Y)];
-            countNeighbour += tempField[getX(j,X) + X * getY(i-1,Y)];
-            countNeighbour += tempField[getX(j+1,X) + X * getY(i-1,Y)];
-            countNeighbour += tempField[getX(j-1,X) + X * getY(i,Y)];
-            countNeighbour += tempField[getX(j+1,X) + X * getY(i,Y)];
-            countNeighbour += tempField[getX(j-1,X) + X * getY(i+1,Y)];
-            countNeighbour += tempField[getX(j,X) + X * getY(i+1,Y)];
-            countNeighbour += tempField[getX(j+1,X) + X * getY(i+1,Y)];
-            if ((tempField[i * X + j] === false) && (countNeighbour === 3)) {
-                fieldForChange[i * X + j] = true;
+            countNeighbour += tempField[getX(j-1,columns) + columns * getY(i-1,rows)];
+            countNeighbour += tempField[getX(j,columns) + columns * getY(i-1,rows)];
+            countNeighbour += tempField[getX(j+1,columns) + columns * getY(i-1,rows)];
+            countNeighbour += tempField[getX(j-1,columns) + columns * getY(i,rows)];
+            countNeighbour += tempField[getX(j+1,columns) + columns * getY(i,rows)];
+            countNeighbour += tempField[getX(j-1,columns) + columns * getY(i+1,rows)];
+            countNeighbour += tempField[getX(j,columns) + columns * getY(i+1,rows)];
+            countNeighbour += tempField[getX(j+1,columns) + columns * getY(i+1,rows)];
+            if ((tempField[i * columns + j] === false) && (countNeighbour === 3)) {
+                fieldForChange[i * columns + j] = true;
             } else if (countNeighbour < 2 || countNeighbour > 3) {
-                fieldForChange[i * X + j] = false;
+                fieldForChange[i * columns + j] = false;
             }
         }
     }

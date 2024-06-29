@@ -112,6 +112,11 @@ main{
   width: 15px;
 }
 
+.link__icon-settings {
+  height: 20px;
+  width: 20px;
+}
+
 .start__icon-settings-step {
   height: 10px;
   width: 10px;
@@ -119,7 +124,7 @@ main{
 
 
 
-.header__list {
+.header__list, .footer__social_links {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -128,10 +133,19 @@ main{
   align-items: center;
 }
 
-.list__item {
+.list__item, .social_links__item {
   float: left;
   display: inline;
 }
+
+.footer__social_links {
+
+}
+
+.social_links__item{
+  color: white;
+}
+
 .options {
   position: relative;
   z-index: 2;
@@ -166,9 +180,6 @@ main{
   min-height: calc(100vh - 50px - 60px - 50px);
 }
 
-.game-field__row {
-  display: table;
-}
 
 .game-main__field{
   width: 100%;
@@ -184,48 +195,20 @@ main{
 }
 
 
-.row__cell--Alive {
-  background: #fff;
-  background: #000;
-  border: 1px solid #999;
-  float: left;
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 1px;
-  height: 5px;
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
-  text-align: center;
-  width: 5px;
-  color: #1a1a1a;
-  min-width: 1px;
-  min-height: 1px;
-}
-
-.row__cell--Dead {
-  background: #fff;
-  border: 1px solid #999;
-  float: left;
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 1px;
-  height: 5px;
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
-  text-align: center;
-  width: 5px;
-  color: #1a1a1a;
-  min-width: 1px;
-  min-height: 1px;
-}
-
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   min-height: 50px;
   background: black;
+  display: flex;
+  justify-content: center;
 }
 
+.social_links__item {
+   margin-left: 20px;
+}
+
+.link__icon-settings-vk:hover, .link__icon-settings-telegram:hover {
+  fill: rgba(30,142,255,0.9);
+}
