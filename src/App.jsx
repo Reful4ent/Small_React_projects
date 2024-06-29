@@ -3,9 +3,9 @@ import {useState} from 'react'
 import CanvasField from "./CanvasField.jsx";
 import GameButtons from "./GameButtons.jsx";
 export default function Game() {
-    const [sizeField, setSizeField] = useState(15);
+    const [sizeField, setSizeField] = useState(20);
     const [isPlaying, setIsPlaying] = useState(false);
-    const [speedGame, setSpeedGame] = useState(250);
+    const [speedGame, setSpeedGame] = useState(10);
     const [isDraw,setIsDraw] = useState(true);
 
     function handleSizeChanged(e) {
@@ -50,22 +50,6 @@ export default function Game() {
             </header>
             <main>
                 <div className="game">
-                    <div className="game__game-settings">
-                        <div className="game-settings__set-field">
-                            <div className="set-field__size">
-                                <text className="count-text">размер сетки {sizeField}:{sizeField}</text>
-                                <input type="range" className="field_slider" min={5} max={150} value={sizeField}
-                                       onChange={handleSizeChanged}/>
-                            </div>
-                            <div className="set-field__speed">
-                                <text className="count-text">скорость изменения:</text>
-                                <input type="range" className="field_slider" min={10} max={5000} value={speedGame}
-                                       onChange={e => {
-                                           setSpeedGame(e.target.value)
-                                       }}/>
-                            </div>
-                        </div>
-                    </div>
                     <div className="game__game-main">
                         <div className="game-main__field">
                             <CanvasField isDraw={isDraw}

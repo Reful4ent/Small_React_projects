@@ -57,11 +57,17 @@ body {
 
 main{
   min-height: calc(100vh - 50px - 50px);
+  position: relative;
 }
 
 .game {
   display: flex;
   flex-direction: column;
+  position: absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
 }
 
 .game-info {
@@ -78,11 +84,13 @@ main{
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 60px;
+  min-width: 200px;
 }
 
 .game-buttons__start, .game-buttons__clear, .game-buttons__step, .game-buttons__reset {
-  height: 25px;
-  width: 25px;
+  height: 30px;
+  width: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -149,10 +157,13 @@ main{
   text-align: center;
 }
 
+
+
 .game__game-main {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: calc(100vh - 50px - 60px - 50px);
 }
 
 .game-field__row {
@@ -161,12 +172,14 @@ main{
 
 .game-main__field{
   width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .game-field__canvas {
+  margin: 20px;
   border: 2px black solid;
 }
 

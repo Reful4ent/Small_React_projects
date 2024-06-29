@@ -1,24 +1,38 @@
-import {useEffect, useRef, useState} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 
 
 export default function CanvasField({isDraw, isPlaying, speedGame, sizeField}) {
+    const [widthCanvas, setWidthCanvas] = useState(window.innerWidth-40);
+    const [heightCanvas, setHeightCanvas] = useState(window.innerHeight-200);
+    let columns = Math.floor((window.innerWidth-40)/sizeField);
+    let rows = Math.floor((window.innerHeight-200)/sizeField);
     const canvasRef = useRef(null);
     const contextRef = useRef(null);
     const [isDown, setIsDown] = useState(false);
-    const [field, setField] = useState(Array((300*150)/(sizeField*sizeField)).fill(false));
+    const [field, setField] = useState(Array(rows*columns).fill(false));
+
 
     useEffect(() => {
         const canvas = canvasRef.current;
         const context = canvas.getContext("2d");
+        for (let x = -0.5; x < widthCanvas; x += widthCanvas/columns) context.strokeRect(x, 0, 0.1, heightCanvas);
+        for (let y = -0.5; y < heightCanvas; y += heightCanvas/rows) context.strokeRect(0, y, widthCanvas, 0.1);
         contextRef.current = context;
+
+        window.addEventListener('resize', resizeBoard);
+
         if (!isPlaying) {
             return;
         }
         const ticking = setInterval(nextStep, speedGame);
-        return () => clearInterval(ticking);
+        return () => {
+            clearInterval(ticking);
+            window.removeEventListener('resize', resizeBoard);
+        }
     },[canvasRef,contextRef, isPlaying, nextStep,speedGame]);
 
     const handleFieldMove = (eventClick) =>  {
+
         if (!isDown) {
             return;
         }
@@ -27,17 +41,10 @@ export default function CanvasField({isDraw, isPlaying, speedGame, sizeField}) {
         offsetX = Math.floor(offsetX/sizeField);
         offsetY = Math.floor(offsetY/sizeField);
 
-        if( offsetX < 0 ) {
-            offsetX = 0;
-        } else if (offsetX >= 300/sizeField) {
-            offsetX = 300/sizeField - 1;
-        }
-
-
         setField(field.map((element, index) => {
-            if(index === (offsetY * (300/sizeField) + offsetX) && isDraw) {
+            if(index === (offsetY * (columns) + offsetX) && isDraw) {
                 return true;
-            } else if (index === (offsetY * (300/sizeField) + offsetX) && !isDraw) {
+            } else if (index === (offsetY * (columns) + offsetX) && !isDraw) {
                 return false;
             } else {
                 return element;
@@ -50,25 +57,36 @@ export default function CanvasField({isDraw, isPlaying, speedGame, sizeField}) {
 
     function drawField(){
         const tempContext = contextRef.current;
-        tempContext.clearRect(0,0,300,150);
-        for (let i = 0; i < 150/sizeField; i++) {
-            for (let j = 0; j < 300/sizeField; j++) {
-                if(field[i * 300/sizeField + j]) {
+        tempContext.clearRect(0,0,widthCanvas,heightCanvas);
+        for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < columns; j++) {
+                if(field[i * columns + j]) {
                     tempContext.fillStyle = "black";
-                    tempContext.fillRect(j * sizeField, i * sizeField, sizeField, sizeField);
+                    tempContext.fillRect(j * widthCanvas/columns, i * heightCanvas/rows, widthCanvas/columns, heightCanvas/rows);
                 } else  {
                     tempContext.fillStyle = "white";
-                    tempContext.fillRect(j * sizeField, i * sizeField, sizeField, sizeField);
+                    tempContext.fillRect(j * widthCanvas/columns, i * heightCanvas/rows, widthCanvas/columns, heightCanvas/rows);
                 }
             }
         }
+
     }
 
     function nextStep() {
-        const fieldForChange = countStep(150/sizeField,300/sizeField,field.slice(),field.slice());
+        const fieldForChange = countStep(rows,columns,field.slice(),field.slice());
         setField(fieldForChange);
         drawField();
     }
+
+    const resizeBoard =  useCallback(() => {
+        console.log((window.innerWidth-40) + " " + (window.innerHeight-200));
+        setWidthCanvas(window.innerWidth-40);
+        setHeightCanvas(window.innerHeight-200)
+        columns = Math.floor((window.innerWidth-40)/sizeField);
+        rows = Math.floor((window.innerHeight-200)/sizeField);
+        setField(Array((rows*columns)).fill(false))
+    },[]);
+
 
     return (
         <>
@@ -77,6 +95,8 @@ export default function CanvasField({isDraw, isPlaying, speedGame, sizeField}) {
                     onMouseDown={() => {setIsDown(true)}}
                     onMouseUp={() => {setIsDown(false)}}
                     ref={canvasRef}
+                    width={widthCanvas}
+                    height={heightCanvas}
             ></canvas>
         </>
     )
