@@ -1,27 +1,43 @@
+
+const socialLinks = [
+    {
+        a_classname: "link link-github",
+        a_href: "https://github.com/Reful4ent",
+        img_src: "/public/Img/github.svg",
+        img_classname: "link__icon-settings link__icon-settings-github",
+    },
+    {
+        a_classname: "link link-telegram",
+        a_href: "https://t.me/Rfflgnt",
+        img_src: "/public/Img/telegram.svg",
+        img_classname: "link__icon-settings link__icon-settings-telegram",
+    },
+    {
+        a_classname: "link link-vk",
+        a_href: "https://vk.com/discounterboy",
+        img_src: "/public/Img/vk.svg",
+        img_classname: "link__icon-settings link__icon-settings-vk",
+    },
+    {
+        a_classname: "link link-gmail",
+        a_href: "mailto:dima2323fr3@gmail.com",
+        img_src: "/public/Img/gmail.svg",
+        img_classname: "link__icon-settings link__icon-settings-gmail",
+    },
+];
+
+
 export default function SocialLinks(){
     return (
         <>
             <ul className="footer__social_links">
-                <li className="social_links__item">
-                    <a className="link link-github" href="https://github.com/Reful4ent">
-                        <img src="/public/Img/github.svg" className="link__icon-settings link__icon-settings-github"/>
-                    </a>
-                </li>
-                <li className="social_links__item">
-                    <a className="link link-telegram" href="https://t.me/Rfflgnt">
-                        <img src="/public/Img/telegram.svg" className="link__icon-settings link__icon-settings-telegram"/>
-                    </a>
-                </li>
-                <li className="social_links__item">
-                    <a className="link link-vk" href="https://vk.com/discounterboy">
-                        <img src="/public/Img/vk.svg" className="link__icon-settings link__icon-settings-vk"/>
-                    </a>
-                </li>
-                <li className="social_links__item">
-                    <a className="link link-gmail" href="mailto:dima2323fr3@gmail.com">
-                        <img src="/public/Img/gmail.svg" className="link__icon-settings link__icon-settings-gmail"/>
-                    </a>
-                </li>
+                {socialLinks.map((item, index) => (
+                    <li key={index} className="social_links__item">
+                        <a className={item.a_classname} target="_blank" href={item.a_href}>
+                            <img src={item.img_src} className={item.img_classname}/>
+                        </a>
+                    </li>
+                ))}
             </ul>
         </>
     )

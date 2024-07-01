@@ -156,6 +156,11 @@ main{
   background: transparent;
   border: 1px solid black;
 }
+
+.options:hover {
+
+}
+
 .options__menu {
   height: 25px;
   width: 25px;
@@ -209,6 +214,6 @@ main{
    margin-left: 20px;
 }
 
-.link__icon-settings-vk:hover, .link__icon-settings-telegram:hover {
+.link__icon-settings-vk:hover, .link__icon-settings-telegram:hover  {
   fill: rgba(30,142,255,0.9);
 }
