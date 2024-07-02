@@ -1,4 +1,4 @@
-import {createElement, forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState} from "react";
+import {useMemo, forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState} from "react";
 
 
 function CanvasField({isDraw, isPlaying, speedGame, sizeField}, ref) {
@@ -18,9 +18,8 @@ function CanvasField({isDraw, isPlaying, speedGame, sizeField}, ref) {
     useEffect(() => {
         const canvas = canvasRef.current;
         const context = canvas.getContext("2d");
-        for (let x = -0.5; x < widthCanvas; x += widthCanvas/columns) context.strokeRect(x, 0, 0.1, heightCanvas);
-        for (let y = -0.5; y < heightCanvas; y += heightCanvas/rows) context.strokeRect(0, y, widthCanvas, 0.1);
         contextRef.current = context;
+
 
         window.addEventListener('resize', resizeBoard);
 
@@ -43,6 +42,7 @@ function CanvasField({isDraw, isPlaying, speedGame, sizeField}, ref) {
 
         offsetX = Math.floor(offsetX/sizeField);
         offsetY = Math.floor(offsetY/sizeField);
+
         setField(field.map((element, index) => {
             if(index === (offsetY * (columns) + offsetX) && isDraw) {
                 return true;
@@ -101,12 +101,24 @@ function CanvasField({isDraw, isPlaying, speedGame, sizeField}, ref) {
         }
     }
 
+
+    const drawGrid = useMemo(() => {
+        const canvas = document.createElement("canvas");
+        canvas.height = heightCanvas;
+        canvas.width = widthCanvas;
+        const context = canvas.getContext("2d");
+        for (let x = 1.5; x < widthCanvas; x += widthCanvas/columns) context.strokeRect(x, 0, 0.1, heightCanvas);
+        for (let y = 1.5; y < heightCanvas; y += heightCanvas/rows) context.strokeRect(0, y, widthCanvas, 0.1);
+        return canvas.toDataURL();
+    },[widthCanvas,heightCanvas,columns,rows]);
+
+
     useImperativeHandle(ref,() => ({clearField,nextStep,resizeBoard}));
 
     return (
         <>
             <div className="game-main__field" >
-                <div className="bacl" style={{height: heightCanvas + 4+"px"}}>
+                <div className="bacl" style={{height: heightCanvas + 4+"px",background: "url('" + drawGrid + "')"}}>
                     <canvas className="game-field__canvas"
                             onMouseMove={(event) => handleFieldMove(event)}
                             onMouseDown={() => {
@@ -151,16 +163,5 @@ function countStep(rows, columns, tempField, fieldForChange) {
 const getX = (x, length) => (length + x) % length;
 const getY = (y, width) => (width + y) % width;
 
-
-const drawGrid = (widthCanvas,heightCanvas,columns,rows) => {
-    const canvas = document.createElement("canvas");
-    canvas.height = heightCanvas;
-    canvas.width = widthCanvas;
-    //background: "url('" + drawGrid(widthCanvas,heightCanvas,columns,rows) + "')"
-    const context = canvas.getContext("2d");
-    for (let x = -0.5; x < widthCanvas; x += widthCanvas/columns) context.strokeRect(x, 0, 0.1, heightCanvas);
-    for (let y = -0.5; y < heightCanvas; y += heightCanvas/rows) context.strokeRect(0, y, widthCanvas, 0.1);
-    return canvas.toDataURL();
-}
 
 export default forwardRef(CanvasField);

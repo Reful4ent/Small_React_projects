@@ -56,6 +56,7 @@ export default function Game() {
             setIsPlaying(!isPlaying);
         setSpeedGame(50);
         setSpeedSliderGame(340)
+        setIsDraw(true);
         if(canvasFieldRef.current) {
             canvasFieldRef.current.clearField();
         }
