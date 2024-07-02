@@ -1,15 +1,18 @@
-import {useCallback, useEffect, useRef, useState} from "react";
+import {createElement, forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState} from "react";
 
 
-export default function CanvasField({isDraw, isPlaying, speedGame, sizeField}) {
-    const [widthCanvas, setWidthCanvas] = useState(window.innerWidth-40);
-    const [heightCanvas, setHeightCanvas] = useState(window.innerHeight-200);
-    let columns = Math.floor((window.innerWidth-40)/sizeField);
-    let rows = Math.floor((window.innerHeight-200)/sizeField);
+function CanvasField({isDraw, isPlaying, speedGame, sizeField}, ref) {
+
+    const [widthCanvas, setWidthCanvas] = useState(window.innerWidth-44);
+    const [heightCanvas, setHeightCanvas] = useState(window.innerHeight-204);
+    const [isDown, setIsDown] = useState(false);
+
+    let columns = Math.floor((window.innerWidth-44)/sizeField);
+    let rows = Math.floor((window.innerHeight-204)/sizeField);
+    const [field, setField] = useState(Array(rows*columns).fill(false));
+
     const canvasRef = useRef(null);
     const contextRef = useRef(null);
-    const [isDown, setIsDown] = useState(false);
-    const [field, setField] = useState(Array(rows*columns).fill(false));
 
 
     useEffect(() => {
@@ -40,7 +43,6 @@ export default function CanvasField({isDraw, isPlaying, speedGame, sizeField}) {
 
         offsetX = Math.floor(offsetX/sizeField);
         offsetY = Math.floor(offsetY/sizeField);
-
         setField(field.map((element, index) => {
             if(index === (offsetY * (columns) + offsetX) && isDraw) {
                 return true;
@@ -69,7 +71,7 @@ export default function CanvasField({isDraw, isPlaying, speedGame, sizeField}) {
                     tempContext.fillStyle = "black";
                     tempContext.fillRect(j * widthCanvas/columns, i * heightCanvas/rows, widthCanvas/columns, heightCanvas/rows);
                 } else  {
-                    tempContext.fillStyle = "white";
+                    tempContext.fillStyle = "transparent";
                     tempContext.fillRect(j * widthCanvas/columns, i * heightCanvas/rows, widthCanvas/columns, heightCanvas/rows);
                 }
             }
@@ -78,43 +80,60 @@ export default function CanvasField({isDraw, isPlaying, speedGame, sizeField}) {
     }
 
     const resizeBoard =  useCallback(() => {
-        setWidthCanvas(window.innerWidth-40);
-        setHeightCanvas(window.innerHeight-200)
-        columns = Math.floor((window.innerWidth-40)/sizeField);
-        rows = Math.floor((window.innerHeight-200)/sizeField);
-        setField(Array((rows*columns)).fill(false))
+        setWidthCanvas(window.innerWidth-44);
+        setHeightCanvas(window.innerHeight-204)
+        columns = Math.floor((window.innerWidth-44)/sizeField);
+        rows = Math.floor((window.innerHeight-204)/sizeField);
+        setField(Array((rows*columns)).fill(false));
     },[]);
 
-    function drawGrid() {
-        const canvas = canvasRef.current;
-        const context = canvas.getContext("2d");
-        contextRef.current = context;
-        return canvas.toDataURL();
+
+
+    const clearField = () =>  {
+        setField(Array((rows*columns)).fill(false));
+        const tempContext = contextRef.current;
+        tempContext.clearRect(0,0,widthCanvas,heightCanvas);
+        for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < columns; j++) {
+                tempContext.fillStyle = "transparent";
+                tempContext.fillRect(j * widthCanvas/columns, i * heightCanvas/rows, widthCanvas/columns, heightCanvas/rows);
+            }
+        }
     }
+
+    useImperativeHandle(ref,() => ({clearField,nextStep,resizeBoard}));
 
     return (
         <>
-            <canvas className="game-field__canvas"
-                    onMouseMove={(event) => handleFieldMove(event)}
-                    onMouseDown={() => {setIsDown(true)}}
-                    onMouseUp={() => {setIsDown(false)}}
-                    ref={canvasRef}
-                    width={widthCanvas}
-                    height={heightCanvas}
-            ></canvas>
+            <div className="game-main__field" >
+                <div className="bacl" style={{height: heightCanvas + 4+"px"}}>
+                    <canvas className="game-field__canvas"
+                            onMouseMove={(event) => handleFieldMove(event)}
+                            onMouseDown={() => {
+                                setIsDown(true)
+                            }}
+                            onMouseUp={() => {
+                                setIsDown(false)
+                            }}
+                            ref={canvasRef}
+                            width={widthCanvas}
+                            height={heightCanvas}
+                    ></canvas>
+                </div>
+            </div>
         </>
     )
 }
 
 
-function countStep(rows, columns, tempField, fieldForChange){
+function countStep(rows, columns, tempField, fieldForChange) {
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < columns; j++) {
             let countNeighbour = 0;
-            countNeighbour += tempField[getX(j-1,columns) + columns * getY(i-1,rows)];
-            countNeighbour += tempField[getX(j,columns) + columns * getY(i-1,rows)];
-            countNeighbour += tempField[getX(j+1,columns) + columns * getY(i-1,rows)];
-            countNeighbour += tempField[getX(j-1,columns) + columns * getY(i,rows)];
+            countNeighbour += tempField[getX(j - 1, columns) + columns * getY(i - 1, rows)];
+            countNeighbour += tempField[getX(j, columns) + columns * getY(i - 1, rows)];
+            countNeighbour += tempField[getX(j + 1, columns) + columns * getY(i - 1, rows)];
+            countNeighbour += tempField[getX(j - 1, columns) + columns * getY(i,rows)];
             countNeighbour += tempField[getX(j+1,columns) + columns * getY(i,rows)];
             countNeighbour += tempField[getX(j-1,columns) + columns * getY(i+1,rows)];
             countNeighbour += tempField[getX(j,columns) + columns * getY(i+1,rows)];
@@ -131,3 +150,17 @@ function countStep(rows, columns, tempField, fieldForChange){
 
 const getX = (x, length) => (length + x) % length;
 const getY = (y, width) => (width + y) % width;
+
+
+const drawGrid = (widthCanvas,heightCanvas,columns,rows) => {
+    const canvas = document.createElement("canvas");
+    canvas.height = heightCanvas;
+    canvas.width = widthCanvas;
+    //background: "url('" + drawGrid(widthCanvas,heightCanvas,columns,rows) + "')"
+    const context = canvas.getContext("2d");
+    for (let x = -0.5; x < widthCanvas; x += widthCanvas/columns) context.strokeRect(x, 0, 0.1, heightCanvas);
+    for (let y = -0.5; y < heightCanvas; y += heightCanvas/rows) context.strokeRect(0, y, widthCanvas, 0.1);
+    return canvas.toDataURL();
+}
+
+export default forwardRef(CanvasField);

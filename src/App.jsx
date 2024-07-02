@@ -1,21 +1,28 @@
 import './App.css'
-import {useState} from 'react'
+import {useRef, useState} from 'react'
 import CanvasField from "./CanvasField.jsx";
 import GameButtons from "./GameButtons.jsx";
 import SocialLinks from "./SocialLinks.jsx";
 import GameSettings from "./GameSettings.jsx";
+import canvasField from "./CanvasField.jsx";
 export default function Game() {
-    const [sizeField, setSizeField] = useState(5);
+    const [sizeField, setSizeField] = useState(7);
     const [isPlaying, setIsPlaying] = useState(false);
-    const [speedGame, setSpeedGame] = useState(10);
-    const [speedSliderGame, setSpeedSliderGame] = useState(10);
+    const [speedGame, setSpeedGame] = useState(50);
+    const [speedSliderGame, setSpeedSliderGame] = useState(390);
     const [isDraw,setIsDraw] = useState(true);
     const [isClosed, setIsClosed] = useState(true);
     const maxSpeed = 400;
     const minSpeed = 10;
+    const canvasFieldRef = useRef(null);
+
 
     function handleSizeChanged(e) {
         setSizeField(e.target.value);
+        if(canvasFieldRef.current) {
+            canvasFieldRef.current.clearField();
+            canvasFieldRef.current.resizeBoard();
+        }
     }
 
     function handleClosedClick() {
@@ -25,14 +32,10 @@ export default function Game() {
     function handleSpeedChanged(e) {
         if (e.target.value <= (maxSpeed - minSpeed) / 2){
             setSpeedGame( maxSpeed - e.target.value + 10);
-            setSpeedSliderGame(e.target.value);
-            console.log(maxSpeed - e.target.value + 10);
-        }
-        else {
-            console.log(Math.abs(e.target.value - maxSpeed) + 10);
+        } else {
             setSpeedGame(Math.abs(e.target.value - maxSpeed) + 10);
-            setSpeedSliderGame(e.target.value)
         }
+        setSpeedSliderGame(e.target.value);
     }
 
 
@@ -51,12 +54,19 @@ export default function Game() {
     function handleResetClick() {
         if (isPlaying)
             setIsPlaying(!isPlaying);
-        setSpeedGame(250);
+        setSpeedGame(50);
+        setSpeedSliderGame(340)
+        if(canvasFieldRef.current) {
+            canvasFieldRef.current.clearField();
+        }
     }
 
     function handleSteplick() {
-        if (!isPlaying) {
+        if (isPlaying) {
             return;
+        }
+        if(canvasFieldRef.current) {
+            canvasFieldRef.current.nextStep();
         }
     }
 
@@ -66,8 +76,10 @@ export default function Game() {
                           maxSpeed={maxSpeed}
                           minSpeed={minSpeed}
                           sizeField={sizeField}
+                          isClosed={isClosed}
                           handleSizeChanged={handleSizeChanged}
-                          handleSpeedChanged={handleSpeedChanged} isClosed={isClosed} handleClosedClick={handleClosedClick}></GameSettings>
+                          handleSpeedChanged={handleSpeedChanged}
+                          handleClosedClick={handleClosedClick}></GameSettings>
             <header className="header">
                 <ul className="header__list">
                     <li className="list__item">
@@ -80,12 +92,11 @@ export default function Game() {
             <main>
                 <div className="game">
                     <div className="game__game-main">
-                        <div className="game-main__field">
                             <CanvasField isDraw={isDraw}
                                          isPlaying={isPlaying}
                                          speedGame={speedGame}
+                                         ref = {canvasFieldRef}
                                          sizeField={sizeField}></CanvasField>
-                        </div>
                     </div>
                     <div className="game__game-buttons">
                         <GameButtons isPlaying={isPlaying}
