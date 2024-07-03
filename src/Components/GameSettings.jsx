@@ -5,7 +5,7 @@ export default function GameSettings({sizeField,handleSizeChanged,maxSpeed, minS
             <div className={value}>
                 <div className="game-settings-close">
                     <button className="close__button" onClick={handleClosedClick}>
-                        <img src="/public/Img/close.svg" className="close__icon"/>
+                        <img src="/Img/close.svg" className="close__icon"/>
                     </button>
                 </div>
                 <div className="game-settings__set-field">

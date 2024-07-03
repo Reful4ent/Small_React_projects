@@ -3,7 +3,7 @@ export default function GameButtons({isPlaying,isDraw,handleSteplick,handleStart
     return (
         <>
             <button className="game-buttons__step" onClick={handleSteplick}>
-                <img src="/public/Img/step-forward.svg" className="start__icon-settings-step"/>
+                <img src="/Img/step-forward.svg" className="start__icon-settings-step"/>
             </button>
             <button className="game-buttons__start" onClick={handleStartClick}>
                 <IconForPlay isPlaying={isPlaying}></IconForPlay>
@@ -12,7 +12,7 @@ export default function GameButtons({isPlaying,isDraw,handleSteplick,handleStart
                 <IconForClear isDraw={isDraw}></IconForClear>
             </button>
             <button className="game-buttons__reset" onClick={handleResetClick}>
-                <img src="/public/Img/restart.svg" className="start__icon-settings"/>
+                <img src="/Img/restart.svg" className="start__icon-settings"/>
             </button>
         </>
     )

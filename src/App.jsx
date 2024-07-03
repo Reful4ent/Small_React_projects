@@ -1,10 +1,11 @@
-import './App.css'
+import './Styles/App.css'
 import {useRef, useState} from 'react'
-import CanvasField from "./CanvasField.jsx";
-import GameButtons from "./GameButtons.jsx";
-import SocialLinks from "./SocialLinks.jsx";
-import GameSettings from "./GameSettings.jsx";
-import canvasField from "./CanvasField.jsx";
+import CanvasField from "./Components/CanvasField.jsx";
+import GameButtons from "./Components/GameButtons.jsx";
+import SocialLinks from "./Components/SocialLinks.jsx";
+import GameSettings from "./Components/GameSettings.jsx";
+
+
 export default function Game() {
     const [sizeField, setSizeField] = useState(7);
     const [isPlaying, setIsPlaying] = useState(false);
