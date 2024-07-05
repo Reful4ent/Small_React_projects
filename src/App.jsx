@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
-import fetchCurrentWeather from "./shared/api/methods.jsx";
+import {fetchCurrentCity, fetchCurrentCityWeather,fetchFiveDaysWeather} from "./shared/api/fetchWeather.js";
+import WeatherCard from "./widgets/WeatherCard/WeatherCard.jsx";
 const App = () => {
     const [cityParams, setCityParams] = useState({
         name: null,
@@ -9,20 +10,31 @@ const App = () => {
 
 
     useEffect(() => {
-        const data = fetchCurrentWeather("Moscow","RU", "ru").then((response) => {
+        const data = fetchCurrentCityWeather("Moscow","RU", "us")
+            .then((response) => {
             console.log(response);
             setCityParams({
-                name: response[0].name,
-                lat: response[0].lat,
-                lon: response[0].lon
-            });
+                name: response.name,
+                lat: response.coord.lat,
+                lon: response.coord.lon,
+                temp: Math.round(response.main.temp),
+                temp_feels_like: Math.round(response.main.feels_like),
+                wind: response.wind,
+                pressure: response.main.pressure * 0.75,
+                weather: response.weather,
+            })
         });
+        //const data_2 = fetchFiveDaysWeather("Moscow","RU", "ru").then((response) => {
+        //    console.log(response);
+        //})
+        //const data_3 = fetchCurrentCity("Moscow", "ru").then((response) => {
+        //    console.log(response);
+        //})
     },[])
 
     return (
         <>
-            <p>{cityParams.lon}</p>
-            <p>{cityParams.lat}</p>
+            <WeatherCard cityParams={cityParams}></WeatherCard>
         </>
     )
 }
