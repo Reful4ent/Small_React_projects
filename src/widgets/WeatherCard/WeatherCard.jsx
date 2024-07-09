@@ -1,41 +1,22 @@
-import {windChecker} from "../../entities/Weather/WindChecker.js";
 import "./WeatherCard.css"
+import {getImage} from "../../entities/Weather/WeatherParams.js";
 
-
-export default function WeatherCard({cityParams}){
+//<img className="weather-icon" src={imgConverter[cityParams.icon]}/>
+export default function WeatherCard({cityParams}) {
     return (
         <>
             <div className="weather-card">
                 <div className="weather-card__main">
                     <div className="main__weather">
                         <div className="main__weather__icon">
-                            <p>{cityParams.temp}</p>
-                            <p>Today</p>
+                            <img className="weather-icon" src={getImage(cityParams.icon)}/>
+                            <p className="text-card weather-temperature">{cityParams.temp}&deg;</p>
+                            <p className="text-card weather-today">Today</p>
+                            <p className="text-card weather-city">{cityParams.name}</p>
                         </div>
                         <div className="main__weather__city">
-                            <p>latitude: {cityParams.lat}</p>
-                            <p>longitude: {cityParams.lon}</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="weather-card__conditions">
-                    <div className="main__city-info">
-                        <div className="city-info city-info__temperature">
-                            <img className="city-info-icon" src="/icons/Weather%20Icons/thermometer.svg"/>
-                            <p className="city-info-text">temperature: {cityParams.temp}&deg; - feels
-                                like: {cityParams.temp_feels_like}&deg;</p>
-                        </div>
-                        <div className="city-info city-info__pressure">
-                            <img className="city-info-icon" src="/icons/Weather%20Icons/barometer.svg"/>
-                            <p className="city-info-text">pressure: {cityParams.pressure} millimeter of mercury</p>
-                        </div>
-                        <div className="city-info city-info__precipitation" >
-                            <img className="city-info-icon" src="/icons/Weather%20Icons/rain.svg"/>
-                            <p className="city-info-text">precipitation: {cityParams.weather[0].description}</p>
-                        </div>
-                        <div className="city-info city-info__wind">
-                            <img className="city-info-icon" src="/icons/Weather%20Icons/wind.svg"/>
-                            <p className="city-info-text">wind: {cityParams.wind.speed}m/s, {windChecker(cityParams.wind.deg)} wind</p>
+                        <p className="text-card city-lat">latitude: {cityParams.lat}</p>
+                            <p className="text-card city-lon">longitude: {cityParams.lon}</p>
                         </div>
                     </div>
                 </div>

@@ -6,6 +6,11 @@ const App = () => {
         name: null,
         lat: 0,
         lon: 0,
+        temp: 0,
+        temp_feels_like:0,
+        wind:0,
+        pressure:0,
+        weather: [{}],
     })
 
 
@@ -22,6 +27,7 @@ const App = () => {
                 wind: response.wind,
                 pressure: response.main.pressure * 0.75,
                 weather: response.weather,
+                icon: response.weather[0].icon,
             })
         });
         //const data_2 = fetchFiveDaysWeather("Moscow","RU", "ru").then((response) => {
