@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {fetchCurrentCity, fetchCurrentCityWeather,fetchFiveDaysWeather} from "./shared/api/fetchWeather.js";
 import WeatherCard from "./widgets/WeatherCard/WeatherCard.jsx";
+import WeatherConditionCard from "./widgets/WeatherCondCard/WeatherCondCard.jsx";
 const App = () => {
     const [cityParams, setCityParams] = useState({
         name: null,
@@ -40,10 +41,12 @@ const App = () => {
         //    console.log(response);
         //})
     },[])
-
+    //<WeatherCard cityParams={cityParams} isLoad={loading}></WeatherCard>
+    //<WeatherConditionCard cityParams={cityParams} isLoad={loading}></WeatherConditionCard>
     return (
         <>
-            <WeatherCard cityParams={cityParams} isLoad={loading}></WeatherCard>
+                <WeatherCard cityParams={cityParams} isLoad={loading}></WeatherCard>
+                <WeatherConditionCard cityParams={cityParams} isLoad={loading}></WeatherConditionCard>
         </>
     )
 }
