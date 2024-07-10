@@ -20,7 +20,22 @@
                 -2px 2px 2px 1px rgba(71%, 71%, 71%, 0.15),
                 -2px -2px 2px 1px rgba(71%, 71%, 71%, 0.15),
                 2px -2px 2px 1px rgba(71%, 71%, 71%, 0.15);
+    transition: 0.5s;
 }
+
+.weather-card_loading {
+    justify-content: center;
+    align-items: center;
+}
+
+.weather-card:hover {
+    box-shadow: 2px 2px 2px 1px rgba(28%, 58%, 100%, 0.15),
+    -2px 2px 2px 1px rgba(28%, 58%, 100%, 0.15),
+    -2px -2px 2px 1px rgba(28%, 58%, 100%, 0.15),
+    2px -2px 2px 1px rgba(28%, 58%, 100%, 0.15);
+    transform: scale(1.025);
+}
+
 
 .main__weather__icon {
     position: relative;
@@ -54,4 +69,5 @@
 .weather-city {
     font-size: 28px;
     font-style: oblique;
+    font-weight: bold;
 }

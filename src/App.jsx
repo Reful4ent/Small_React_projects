@@ -13,6 +13,8 @@ const App = () => {
         weather: [{}],
     })
 
+    const [loading, setLoading] = useState(false);
+
 
     useEffect(() => {
         const data = fetchCurrentCityWeather("Moscow","RU", "us")
@@ -28,7 +30,8 @@ const App = () => {
                 pressure: response.main.pressure * 0.75,
                 weather: response.weather,
                 icon: response.weather[0].icon,
-            })
+            });
+            setLoading(true);
         });
         //const data_2 = fetchFiveDaysWeather("Moscow","RU", "ru").then((response) => {
         //    console.log(response);
@@ -40,7 +43,7 @@ const App = () => {
 
     return (
         <>
-            <WeatherCard cityParams={cityParams}></WeatherCard>
+            <WeatherCard cityParams={cityParams} isLoad={loading}></WeatherCard>
         </>
     )
 }
