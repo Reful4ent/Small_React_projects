@@ -21,7 +21,7 @@ function Weather({cityParams}) {
                     <img className="weather-icon" src={getImage(cityParams.icon)}/>
                     <p className="text-card weather-temperature">{cityParams.temp}&deg;</p>
                     <p className="text-card weather-today">Today</p>
-                    <p className="text-card weather-city">{cityParams.name}</p>
+                    <p className="text-card weather-city">{cityParams.name}, {cityParams.country}</p>
                 </div>
                 <div className="main__weather__city">
                     <p className="text-card city-lat">latitude: {cityParams.lat}</p>

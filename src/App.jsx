@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {fetchCurrentCity, fetchCurrentCityWeather,fetchFiveDaysWeather} from "./shared/api/fetchWeather.js";
 import WeatherCard from "./widgets/WeatherCard/WeatherCard.jsx";
 import WeatherConditionCard from "./widgets/WeatherCondCard/WeatherCondCard.jsx";
+import SearchField from "./widgets/SearchField/SearchField.jsx";
 const App = () => {
     const [cityParams, setCityParams] = useState({
         name: null,
@@ -15,14 +16,16 @@ const App = () => {
     })
 
     const [loading, setLoading] = useState(false);
-
+    const [currentCity, setCurrentCity] = useState('moscow');
+    const [currentState, setCurrentState] = useState('');
+    const [currentCountry, setCurrentCountry] = useState('');
 
     useEffect(() => {
-        const data = fetchCurrentCityWeather("Moscow","RU", "us")
+        const data = fetchCurrentCityWeather(currentCity,currentState,currentCountry, "us")
             .then((response) => {
-            console.log(response);
             setCityParams({
                 name: response.name,
+                country: response.sys.country,
                 lat: response.coord.lat,
                 lon: response.coord.lon,
                 temp: Math.round(response.main.temp),
@@ -43,10 +46,13 @@ const App = () => {
     },[])
     //<WeatherCard cityParams={cityParams} isLoad={loading}></WeatherCard>
     //<WeatherConditionCard cityParams={cityParams} isLoad={loading}></WeatherConditionCard>
+    //<WeatherCard cityParams={cityParams} isLoad={loading}></WeatherCard>
+    //<WeatherConditionCard cityParams={cityParams} isLoad={loading}></WeatherConditionCard>
     return (
         <>
-                <WeatherCard cityParams={cityParams} isLoad={loading}></WeatherCard>
-                <WeatherConditionCard cityParams={cityParams} isLoad={loading}></WeatherConditionCard>
+            <SearchField></SearchField>
+            <WeatherCard cityParams={cityParams} isLoad={loading}></WeatherCard>
+            <WeatherConditionCard cityParams={cityParams} isLoad={loading}></WeatherConditionCard>
         </>
     )
 }

@@ -10,10 +10,10 @@ export const fetchCurrentCity = async (city) => {
     }
 }
 
-export const fetchCurrentCityWeather = async (city,country,lang) => {
+export const fetchCurrentCityWeather = async (city,state,country,lang) => {
     try {
 
-        const url_coords = `http://api.openweathermap.org/geo/1.0/direct?q=${city},${country}&limit=5&appid=${import.meta.env.VITE_APP_ID}`;
+        const url_coords = `http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&limit=5&appid=${import.meta.env.VITE_APP_ID}`;
         const response_coords = await fetch(url_coords);
         const data_coords = await response_coords.json();
 
@@ -27,10 +27,10 @@ export const fetchCurrentCityWeather = async (city,country,lang) => {
     }
 }
 
-export const fetchFiveDaysWeather = async (city,country,lang) => {
+export const fetchFiveDaysWeather = async (city,state,country,lang) => {
     try {
 
-        const url_coords = `http://api.openweathermap.org/geo/1.0/direct?q=${city},${country}&limit=5&appid=${import.meta.env.VITE_APP_ID}`;
+        const url_coords = `http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&limit=5&appid=${import.meta.env.VITE_APP_ID}`;
         const response_coords = await fetch(url_coords);
         const data_coords = await response_coords.json();
 
