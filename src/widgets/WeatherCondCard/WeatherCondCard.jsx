@@ -1,6 +1,6 @@
 import {windChecker} from "../../entities/Weather/WindChecker.js";
 import "./WeatherCondCard.css"
-import Loading from "../Loading/Loading.jsx";
+import Loading from "../../shared/ui/Loading/Loading.jsx";
 
 
 

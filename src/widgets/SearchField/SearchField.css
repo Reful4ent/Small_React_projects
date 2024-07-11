@@ -1,0 +1,29 @@
+.search-form__cities-list {
+    display: none;
+}
+
+.header__search-form{
+    margin: 10px 10px 10px 10px;
+}
+
+.search-form__input{
+    min-width: 300px;
+    width: 500px;
+    height: 40px;
+    padding: 5px;
+    padding-left: 15px;
+    border-radius: 20px;
+    border: 1px solid rgba(28%, 58%, 100%, 0.5);
+    font-family: Montserrat;
+    font-size: 18px;
+    transition: 1s;
+}
+
+.search-form__input:focus{
+    outline: none;
+
+    box-shadow: 2px 2px 2px 1px rgba(28%, 58%, 100%, 0.15),
+                -2px 2px 2px 1px rgba(28%, 58%, 100%, 0.15),
+                -2px -2px 2px 1px rgba(28%, 58%, 100%, 0.15),
+                2px -2px 2px 1px rgba(28%, 58%, 100%, 0.15);
+}

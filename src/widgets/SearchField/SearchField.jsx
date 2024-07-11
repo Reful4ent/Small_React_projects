@@ -1,19 +1,8 @@
 import {useEffect, useState} from "react";
 import {fetchCurrentCity} from "../../shared/api/fetchWeather.js";
+import {getCitiesList} from "../../entities/Weather/SearchCity.js";
+import "./SearchField.css"
 
-
-const getCitiesList = async (city) => {
-    if (city === '' || city === null) {
-        return null;
-    }
-    let list = [];
-    let fetchCities = await fetchCurrentCity(city).then((response) => {
-        for(let item of response) {
-            list.push({city: item.name,country: item.country,state: item.state});
-        }
-    })
-    return list;
-}
 
 
 export default function SearchField(){
@@ -30,12 +19,12 @@ export default function SearchField(){
     }, [responseCity]);
 
 
-    /// {(citiesList === [] || citiesList === null) ? <Nothing/> : <CitiesListElem cityList={citiesList}/>}
     return (
         <>
             <div className="header__search-form">
                 <input className="search-form__input"
                        type="search"
+                       placeholder="Moscow..."
                        value={responseCity}
                        onChange={(e) => setResponseCity(e.target.value)}/>
                 <div className="search-form__cities-list">
@@ -55,9 +44,7 @@ function Nothing() {
     )
 }
 
-
 function CitiesList({cityList}) {
-
     return (
         <>
             <ul>

@@ -1,6 +1,6 @@
 import "./WeatherCard.css"
 import {getImage} from "../../entities/Weather/WeatherParams.js";
-import Loading from "../Loading/Loading.jsx";
+import Loading from "../../shared/ui/Loading/Loading.jsx";
 
 //<img className="weather-icon" src={imgConverter[cityParams.icon]}/>
 export default function WeatherCard({cityParams,isLoad}) {
