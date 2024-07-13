@@ -1,25 +1,17 @@
 .header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: transparent;
+    transition: 0.5s;
+}
+
+.header.black{
+    background-color: #0D1117;
+    transition: 0.5s;
 }
 
 .weather-header {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-evenly;
 }
 
-.weather-header__icon{
-    width: 70px;
-    height: 70px;
-}
-
-.weather-header__text{
-    font-family: Montserrat;
-    color: #4793FF;
-    margin-left: 10px;
-    margin-right: 10px;
-    font-size: 22px;
-    font-weight: bold;
-}

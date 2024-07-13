@@ -42,10 +42,17 @@
 
 input:checked + .slider {
     background-color: #000000;
+    box-shadow: 1px 1px 1px 1px white,
+                -1px 1px 1px 1px white,
+                1px -1px 1px 1px white,
+                -1px -1px 1px 1px white;
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px #000000;
+    box-shadow: 1px 1px 1px 1px white,
+    -1px 1px 1px 1px white,
+    1px -1px 1px 1px white,
+    -1px -1px 1px 1px white;
 }
 
 input:checked + .slider:before {

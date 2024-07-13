@@ -1,16 +1,16 @@
 import SearchField from "../SearchField/SearchField.jsx";
 import ToggleSwitch from "../../shared/ui/Toggle/ToggleSwitch.jsx";
 import "./Header.css"
+import Logo from "../../shared/ui/Logo/Logo.jsx";
 
-export default function Header() {
+export default function Header({themeIsBlack, handleThemeChanged,fetchData}) {
    return (
        <>
-           <header className="header">
+           <header className={themeIsBlack ? "header black" : "header"}>
                <div className="weather-header">
-                   <img className="weather-header__icon" src="/public/icons/weather.svg"/>
-                   <p className="weather-header__text">WEATHER TODAY</p>
-                   <SearchField></SearchField>
-                   <ToggleSwitch></ToggleSwitch>
+                   <Logo></Logo>
+                   <SearchField fetchData={fetchData}></SearchField>
+                   <ToggleSwitch themeIsBlack={themeIsBlack} handleThemeChanged={handleThemeChanged}></ToggleSwitch>
                </div>
            </header>
        </>

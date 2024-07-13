@@ -1,5 +1,5 @@
 import Header from "../widgets/Header/Header.jsx";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {fetchCurrentCity,fetchCurrentCityWeather,fetchFiveDaysWeather} from "../shared/api/fetchWeather.js";
 import WeatherCard from "../widgets/WeatherCard/WeatherCard.jsx";
 import WeatherConditionCard from "../widgets/WeatherCondCard/WeatherCondCard.jsx";
@@ -16,14 +16,20 @@ export default function MainPage(){
         pressure:0,
         weather: [{}],
     })
-
     const [loading, setLoading] = useState(false);
-    const [currentCity, setCurrentCity] = useState('moscow');
+    const [currentCity, setCurrentCity] = useState('Moscow');
     const [currentState, setCurrentState] = useState('');
     const [currentCountry, setCurrentCountry] = useState('');
 
-    useEffect(() => {
-        const data = fetchCurrentCityWeather(currentCity,currentState,currentCountry, "us")
+
+
+    const [themeIsBlack, setThemeIsBlack] = useState(false);
+
+    const handleThemeChanged = () => setThemeIsBlack(!themeIsBlack);
+
+
+    const fetchData = useCallback(async (city,state,country) => {
+        await fetchCurrentCityWeather(city,state,country, "us")
             .then((response) => {
                 setCityParams({
                     name: response.name,
@@ -39,21 +45,16 @@ export default function MainPage(){
                 });
                 setLoading(true);
             });
-        //const data_2 = fetchFiveDaysWeather("Moscow","RU", "ru").then((response) => {
-        //    console.log(response);
-        //})
-        //const data_3 = fetchCurrentCity("Moscow", "ru").then((response) => {
-        //    console.log(response);
-        //})
     },[])
-    //<WeatherCard cityParams={cityParams} isLoad={loading}></WeatherCard>
-    //<WeatherConditionCard cityParams={cityParams} isLoad={loading}></WeatherConditionCard>
-    //<WeatherCard cityParams={cityParams} isLoad={loading}></WeatherCard>
-    //<WeatherConditionCard cityParams={cityParams} isLoad={loading}></WeatherConditionCard>
+
+    useEffect( () => {
+        fetchData(currentCity,currentState,currentCountry);
+    },[fetchData])
+
     return (
         <>
-            <Header></Header>
-            <main className="main-cards">
+            <Header themeIsBlack={themeIsBlack} handleThemeChanged={handleThemeChanged} fetchData={fetchData}></Header>
+            <main className={themeIsBlack ? "main-cards black" : "main-cards"}>
                 <WeatherCard cityParams={cityParams} isLoad={loading}></WeatherCard>
                 <WeatherConditionCard cityParams={cityParams} isLoad={loading}></WeatherConditionCard>
             </main>

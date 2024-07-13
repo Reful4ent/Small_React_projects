@@ -5,7 +5,7 @@ import "./SearchField.css"
 
 
 
-export default function SearchField(){
+export default function SearchField({fetchData}){
     const [responseCity, setResponseCity] = useState('');
     const [citiesList, setCitiesList] = useState(null);
 
@@ -14,7 +14,7 @@ export default function SearchField(){
             getCitiesList(responseCity).then((response) => {
                 setCitiesList(response);
             });
-        },200);
+        },300);
         return () => clearTimeout(Debounce);
     }, [responseCity]);
 
@@ -22,13 +22,13 @@ export default function SearchField(){
     return (
         <>
             <div className="header__search-form">
-                <input className="search-form__input"
+                <input className={(citiesList !== [] && citiesList !== null) ? "search-form__input list" : "search-form__input"}
                        type="search"
                        placeholder="Moscow..."
                        value={responseCity}
                        onChange={(e) => setResponseCity(e.target.value)}/>
                 <div className="search-form__cities-list">
-                    {(citiesList === [] || citiesList === null) ? <Nothing/> : <CitiesList cityList={citiesList}/>}
+                    {(citiesList !== [] && citiesList !== null) && <CitiesList cityList={citiesList} fetchData={fetchData}/>}
                 </div>
             </div>
         </>
@@ -36,20 +36,13 @@ export default function SearchField(){
 }
 
 
-function Nothing() {
-    return (
-        <>
-            <div>nothing</div>
-        </>
-    )
-}
 
-function CitiesList({cityList}) {
+function CitiesList({cityList,fetchData}) {
     return (
         <>
-            <ul>
+            <ul className="cities-list">
                 {cityList.map((item,index) => (
-                    <li key={index} className="cities-list__item">
+                    <li key={index} className="cities-list__item" onDoubleClick={() => fetchData(item.city,item.country,item.state)}>
                         {item.city}, {item.country}, {item.state}
                     </li>
                 ))}

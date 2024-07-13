@@ -1,0 +1,17 @@
+.weather-header__logo {
+    display: flex;
+}
+
+.weather-header__logo-icon{
+    width: 70px;
+    height: 70px;
+}
+
+.weather-header__logo-text{
+    font-family: Montserrat;
+    color: #4793FF;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 22px;
+    font-weight: bold;
+}
