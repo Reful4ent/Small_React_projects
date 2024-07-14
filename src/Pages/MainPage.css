@@ -1,7 +1,12 @@
-body{
+.body-background{
     margin: 0px;
+    transition: 0.5s;
 }
 
+.body-background.black {
+    background-color: #0D1117;
+    transition: 0.5s;
+}
 
 .main-cards{
     display: flex;

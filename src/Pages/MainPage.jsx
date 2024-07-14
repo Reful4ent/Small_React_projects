@@ -4,6 +4,7 @@ import {fetchCurrentCity,fetchCurrentCityWeather,fetchFiveDaysWeather} from "../
 import WeatherCard from "../widgets/WeatherCard/WeatherCard.jsx";
 import WeatherConditionCard from "../widgets/WeatherCondCard/WeatherCondCard.jsx";
 import "./MainPage.css"
+import Button from "../shared/ui/Button/Tab.jsx";
 
 export default function MainPage(){
     const [cityParams, setCityParams] = useState({
@@ -17,7 +18,7 @@ export default function MainPage(){
         weather: [{}],
     })
     const [loading, setLoading] = useState(false);
-    const [currentCity, setCurrentCity] = useState('Moscow');
+    const [currentCity, setCurrentCity] = useState('New York');
     const [currentState, setCurrentState] = useState('');
     const [currentCountry, setCurrentCountry] = useState('');
 
@@ -49,11 +50,19 @@ export default function MainPage(){
 
     useEffect( () => {
         fetchData(currentCity,currentState,currentCountry);
-    },[fetchData])
+    },[fetchData,currentCity,currentState,currentCountry])
+
+
+    ///<Header themeIsBlack={themeIsBlack} handleThemeChanged={handleThemeChanged} fetchData={fetchData}></Header>
+    //             <main className={themeIsBlack ? "main-cards black" : "main-cards"}>
+    //                 <WeatherCard cityParams={cityParams} isLoad={loading}></WeatherCard>
+    //                 <WeatherConditionCard cityParams={cityParams} isLoad={loading}></WeatherConditionCard>
+    //             </main>
+    //<Button text="sda" onClick={() => console.log("sd")}></Button>
 
     return (
         <>
-            <Header themeIsBlack={themeIsBlack} handleThemeChanged={handleThemeChanged} fetchData={fetchData}></Header>
+            <Header fetchData={fetchData}></Header>
             <main className={themeIsBlack ? "main-cards black" : "main-cards"}>
                 <WeatherCard cityParams={cityParams} isLoad={loading}></WeatherCard>
                 <WeatherConditionCard cityParams={cityParams} isLoad={loading}></WeatherConditionCard>

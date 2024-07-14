@@ -47,13 +47,14 @@
     height: 100px;
     width: 100px;
     z-index: -1;
-    left: 90%;
+    left: 85%;
 }
 
 .text-card {
     margin: 5px 0px 0px 20px;
     font-family: 'Montserrat';
     font-size: 22px;
+    transition: 0.5s;
 }
 
 .weather-temperature {
@@ -71,4 +72,14 @@
     font-size: 28px;
     font-style: oblique;
     font-weight: bold;
+}
+
+
+.text-card.city-lat.black, .text-card.city-lon.black{
+    color: #939CB0;
+    transition: 0.5s;
+}
+.text-card.weather-today.black, .text-card.weather-city.black {
+    color: white;
+    transition: 0.5s;
 }

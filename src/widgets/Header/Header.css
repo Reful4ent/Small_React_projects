@@ -1,11 +1,5 @@
 .header {
     background-color: transparent;
-    transition: 0.5s;
-}
-
-.header.black{
-    background-color: #0D1117;
-    transition: 0.5s;
 }
 
 .weather-header {
