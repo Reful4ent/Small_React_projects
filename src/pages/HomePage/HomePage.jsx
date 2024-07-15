@@ -5,6 +5,7 @@ import WeatherCard from "../widgets/WeatherCard/WeatherCard.jsx";
 import WeatherConditionCard from "../widgets/WeatherCondCard/WeatherCondCard.jsx";
 import "./MainPage.css"
 import Button from "../shared/ui/Button/Tab.jsx";
+import ThemeChanger from "../features/ThemeChanger/ThemeChanger.js";
 
 export default function MainPage(){
     const [cityParams, setCityParams] = useState({
@@ -18,16 +19,17 @@ export default function MainPage(){
         weather: [{}],
     })
     const [loading, setLoading] = useState(false);
-    const [currentCity, setCurrentCity] = useState('New York');
-    const [currentState, setCurrentState] = useState('');
-    const [currentCountry, setCurrentCountry] = useState('');
-
-
 
     const [themeIsBlack, setThemeIsBlack] = useState(false);
 
-    const handleThemeChanged = () => setThemeIsBlack(!themeIsBlack);
-
+    function handleThemeChanged(){
+        setThemeIsBlack(!themeIsBlack);
+        if(themeIsBlack) {
+            ThemeChanger('light')
+        } else {
+            ThemeChanger("dark");
+        }
+    }
 
     const fetchData = useCallback(async (city,state,country) => {
         await fetchCurrentCityWeather(city,state,country, "us")
@@ -49,8 +51,8 @@ export default function MainPage(){
     },[])
 
     useEffect( () => {
-        fetchData(currentCity,currentState,currentCountry);
-    },[fetchData,currentCity,currentState,currentCountry])
+        fetchData('New York','','');
+    },[fetchData])
 
 
     ///<Header themeIsBlack={themeIsBlack} handleThemeChanged={handleThemeChanged} fetchData={fetchData}></Header>
@@ -62,8 +64,8 @@ export default function MainPage(){
 
     return (
         <>
-            <Header fetchData={fetchData}></Header>
-            <main className={themeIsBlack ? "main-cards black" : "main-cards"}>
+            <Header themeIsBlack={themeIsBlack} handleThemeChanged={handleThemeChanged} fetchData={fetchData}></Header>
+            <main className="main-cards">
                 <WeatherCard cityParams={cityParams} isLoad={loading}></WeatherCard>
                 <WeatherConditionCard cityParams={cityParams} isLoad={loading}></WeatherConditionCard>
             </main>
