@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
-import {fetchCurrentCity} from "../../shared/api/fetchWeather.js";
-import {getCitiesList} from "../../entities/Weather/SearchCity.js";
-import CitiesList from "../CitiesList/CitiesList.jsx";
+import {fetchCurrentCity} from "../../../shared/api/fetchWeather.js";
+import {getCitiesList} from "../../../entities/Weather/SearchCity.js";
+import SearchCitiesList from "../SearchCitiesList/SearchCitiesList.jsx";
 import "./SearchField.css"
 
 
@@ -9,6 +9,7 @@ import "./SearchField.css"
 export default function SearchField({fetchData}){
     const [responseCity, setResponseCity] = useState('');
     const [citiesList, setCitiesList] = useState(null);
+
 
     useEffect(() => {
         const Debounce = setTimeout(() => {
@@ -28,8 +29,8 @@ export default function SearchField({fetchData}){
                        placeholder="Moscow..."
                        value={responseCity}
                        onChange={(e) => setResponseCity(e.target.value)}/>
-                <div className="search-form__cities-list">
-                    {(citiesList !== [] && citiesList !== null) && <CitiesList cityList={citiesList} fetchData={fetchData}/>}
+                <div className="search-form__cities-list" >
+                    {(citiesList !== [] && citiesList !== null) && <SearchCitiesList cityList={citiesList} fetchData={fetchData}/>}
                 </div>
             </div>
         </>

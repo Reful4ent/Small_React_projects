@@ -1,8 +1,8 @@
-import MainPage from "./Pages/MainPage.jsx";
+import HomePage from "./pages/HomePage/HomePage.jsx";
 const App = () => {
     return (
         <>
-            <MainPage></MainPage>
+            <HomePage></HomePage>
         </>
     )
 }

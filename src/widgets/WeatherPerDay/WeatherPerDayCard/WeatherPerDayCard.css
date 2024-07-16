@@ -1,0 +1,61 @@
+.weather-list__per-day-item {
+    list-style-type: none;
+    width: 165px;
+    margin: 10px;
+}
+
+.per-day-item{
+    background-color: rgba(28%, 58%, 100%, 0.2);
+    border-radius: 20px;
+    transition: 0.5s;
+}
+
+.per-day-item:hover{
+    box-shadow: 2px 2px 2px 1px rgba(28%, 58%, 100%, 0.15),
+    -2px 2px 2px 1px rgba(28%, 58%, 100%, 0.15),
+    -2px -2px 2px 1px rgba(28%, 58%, 100%, 0.15),
+    2px -2px 2px 1px rgba(28%, 58%, 100%, 0.15);
+    transform: scale(1.025);
+}
+
+.text-card-day{
+    font-family: Montserrat;
+    font-size: 16px;
+    padding-left: 20px;
+}
+
+.text-date{
+    padding-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.text-weather{
+    padding-bottom: 10px;
+    color: #939CB0;
+}
+
+.text-temp{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.text-feels-temp{
+    font-size: 14px;
+    color: #939CB0;
+}
+
+.weather-icon-day{
+    height: 50px;
+    width: 50px;
+    padding-left: 20px;
+}
+
+
+.text-date.black, .text-temp.black {
+    color: white;
+}
+
+.per-day-item.black{
+    background-color: #2E3035;
+}

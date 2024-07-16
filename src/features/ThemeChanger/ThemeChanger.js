@@ -8,6 +8,11 @@ export default function ThemeChanger(theme) {
         '.text-card.city-lon',
         '.text-card.weather-today',
         '.text-card.weather-city',
+        '.text-date',
+        '.text-temp',
+        '.per-day-item',
+        '.five-day-item',
+        '.tab'
     ]
 
     if(theme === 'light') {

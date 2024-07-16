@@ -1,26 +1,34 @@
-import Header from "../widgets/Header/Header.jsx";
+import Header from "../../widgets/Header/Header.jsx";
 import {useCallback, useEffect, useState} from "react";
-import {fetchCurrentCity,fetchCurrentCityWeather,fetchFiveDaysWeather} from "../shared/api/fetchWeather.js";
-import WeatherCard from "../widgets/WeatherCard/WeatherCard.jsx";
-import WeatherConditionCard from "../widgets/WeatherCondCard/WeatherCondCard.jsx";
-import "./MainPage.css"
-import Button from "../shared/ui/Button/Tab.jsx";
-import ThemeChanger from "../features/ThemeChanger/ThemeChanger.js";
+import {fetchCurrentCityWeather,fetchFiveDaysWeather} from "../../shared/api/fetchWeather.js";
+import WeatherCard from "../../widgets/WeatherCard/WeatherCard.jsx";
+import WeatherConditionCard from "../../widgets/WeatherCondCard/WeatherCondCard.jsx";
+import "./HomePage.css"
+import Button from "../../shared/ui/Button/Tab.jsx";
+import ThemeChanger from "../../features/ThemeChanger/ThemeChanger.js";
+import WeatherPerDayList from "../../widgets/WeatherPerDay/WeatherPerDayList/WeatherPerDayList.jsx";
+import WeatherFiveDaysList from "../../widgets/WeatherFiveDays/WeatherFiveDaysList/WeatherFiveDaysList.jsx";
 
-export default function MainPage(){
-    const [cityParams, setCityParams] = useState({
-        name: null,
-        lat: 0,
-        lon: 0,
-        temp: 0,
-        temp_feels_like:0,
-        wind:0,
-        pressure:0,
-        weather: [{}],
-    })
+export default function HomePage(){
+
+    const [cityParams, setCityParams] = useState(null)
+    const [cityWeatherPerDay, setCityWeatherPerDay] = useState([]);
+    const [cityWeatherFiveDay, setCityWeatherFiveDay] = useState([]);
+
     const [loading, setLoading] = useState(false);
-
     const [themeIsBlack, setThemeIsBlack] = useState(false);
+
+    const [listIdButton, setListIdButton] = useState("#tab_1");
+    const Lists = {
+        "#tab_1" : <WeatherPerDayList perDayParams={cityWeatherPerDay} isLoad={loading} themeIsBlack={themeIsBlack}/>,
+        "#tab_2" : <WeatherFiveDaysList fiveDayParams={cityWeatherFiveDay} isLoad={loading} themeIsBlack={themeIsBlack}/>
+    }
+
+    function handleListChanged(idButton,classNameButton){
+        document.querySelectorAll(classNameButton).forEach(elem => elem.classList.remove("active"));
+        document.querySelector(idButton).classList.add("active");
+        setListIdButton(idButton);
+    }
 
     function handleThemeChanged(){
         setThemeIsBlack(!themeIsBlack);
@@ -32,7 +40,7 @@ export default function MainPage(){
     }
 
     const fetchData = useCallback(async (city,state,country) => {
-        await fetchCurrentCityWeather(city,state,country, "us")
+        await fetchCurrentCityWeather(city,state,country, 'us')
             .then((response) => {
                 setCityParams({
                     name: response.name,
@@ -46,29 +54,43 @@ export default function MainPage(){
                     weather: response.weather,
                     icon: response.weather[0].icon,
                 });
-                setLoading(true);
             });
+
+        await fetchFiveDaysWeather(city,state,country,'us')
+            .then((response) => {
+                let items = [];
+                for (let i = 0; i < (response.list.length / 5); i++) {
+                    items.push(response.list[i]);
+                }
+                setCityWeatherPerDay(items);
+                let items_2 = []
+                for (let i = 0; i < response.list.length; i+=8){
+                    items_2.push(response.list[i]);
+                }
+                setCityWeatherFiveDay(items_2);
+                setLoading(true);
+            })
     },[])
 
     useEffect( () => {
-        fetchData('New York','','');
+        setLoading(false);
+        fetchData('Moscow','','RU');
     },[fetchData])
-
-
-    ///<Header themeIsBlack={themeIsBlack} handleThemeChanged={handleThemeChanged} fetchData={fetchData}></Header>
-    //             <main className={themeIsBlack ? "main-cards black" : "main-cards"}>
-    //                 <WeatherCard cityParams={cityParams} isLoad={loading}></WeatherCard>
-    //                 <WeatherConditionCard cityParams={cityParams} isLoad={loading}></WeatherConditionCard>
-    //             </main>
-    //<Button text="sda" onClick={() => console.log("sd")}></Button>
 
     return (
         <>
-            <Header themeIsBlack={themeIsBlack} handleThemeChanged={handleThemeChanged} fetchData={fetchData}></Header>
-            <main className="main-cards">
-                <WeatherCard cityParams={cityParams} isLoad={loading}></WeatherCard>
-                <WeatherConditionCard cityParams={cityParams} isLoad={loading}></WeatherConditionCard>
-            </main>
+            <Header themeIsBlack={themeIsBlack} handleThemeChanged={handleThemeChanged} fetchData={fetchData}/>
+            <div className="main-cards">
+                <WeatherCard cityParams={cityParams} isLoad={loading}/>
+                <WeatherConditionCard cityParams={cityParams} isLoad={loading}/>
+            </div>
+            <div className="button-list">
+                <Button id="tab_1" text="24 Часа" onClick={() => handleListChanged("#tab_1",".tab")}/>
+                <Button id="tab_2" text="5 дней" onClick={() => handleListChanged("#tab_2",".tab")}/>
+            </div>
+            <div className="weather-list">
+                {Lists[listIdButton]}
+            </div>
         </>
     )
 }

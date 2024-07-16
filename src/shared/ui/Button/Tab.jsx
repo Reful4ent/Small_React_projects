@@ -2,10 +2,10 @@
 import "./Tab.css"
 
 
-export default function Tab({text,onClick}){
+export default function Tab({id,text,onClick}){
     return (
         <>
-            <div className="tab" onClick={onClick}>{text}</div>
+            <div id={id} className="tab" onClick={onClick}>{text}</div>
         </>
     )
 }
