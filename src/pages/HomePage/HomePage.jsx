@@ -19,6 +19,7 @@ export default function HomePage(){
     const [themeIsBlack, setThemeIsBlack] = useState(false);
 
     const [listIdButton, setListIdButton] = useState("#tab_1");
+
     const Lists = {
         "#tab_1" : <WeatherPerDayList perDayParams={cityWeatherPerDay} isLoad={loading} themeIsBlack={themeIsBlack}/>,
         "#tab_2" : <WeatherFiveDaysList fiveDayParams={cityWeatherFiveDay} isLoad={loading} themeIsBlack={themeIsBlack}/>

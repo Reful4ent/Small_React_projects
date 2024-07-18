@@ -21,5 +21,11 @@ export default function WeatherPerDayCard({thisHoursParams, id, themeIsBlack}){
 function getWeekDay(time) {
     let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const date = new Date(time);
-    return days[date.getDay()] + " " + time.split(' ')[1];
+    return (
+        <>
+            {days[date.getDay()]}
+            <br/>
+            {time.split(' ')[1]}
+        </>
+    )
 }

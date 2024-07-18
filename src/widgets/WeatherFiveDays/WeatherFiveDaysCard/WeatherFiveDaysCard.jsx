@@ -6,7 +6,7 @@ export default function WeatherFiveDaysCard({fiveDayParams, id,themeIsBlack}){
         <>
             <li className="weather-list__five-day-item" key={id}>
                 <div className={themeIsBlack ? "five-day-item black" : "five-day-item"}>
-                    <p className={themeIsBlack ? "text-card-day text-date black" : "text-card-day text-date"}>{getWeekDay(fiveDayParams.dt_txt)}</p>
+                    <p className={themeIsBlack ? "text-card-day text-date-five black" : "text-card-day text-date-five"}>{getWeekDay(fiveDayParams.dt_txt)}</p>
                     <img className="weather-icon-day" src={getImage(fiveDayParams.weather[0].icon)}/>
                     <p className={themeIsBlack ? "text-card-day text-temp black" : "text-card-day text-temp"}>{Math.round(fiveDayParams.main.temp)}&deg;</p>
                     <p className="text-card-day text-feels-temp">{Math.round(fiveDayParams.main.feels_like)}&deg;</p>
