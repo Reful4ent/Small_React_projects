@@ -4,11 +4,11 @@ import {RouterProvider} from "react-router-dom";
 import {router} from "./router/routes.jsx";
 
 
-//<RouterProvider router={router}></RouterProvider>
+
 const App = () => {
     return (
         <>
-            <RouterProvider router={router}/>
+            <RouterProvider router={router}></RouterProvider>
         </>
     )
 }
