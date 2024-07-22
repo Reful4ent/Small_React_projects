@@ -81,8 +81,8 @@ export default function HomePage() {
                 <WeatherConditionCard cityParams={cityParams} isLoad={loading}/>
             </div>
             <div className="button-list">
-                <Button id="tab_1" text="24 Часа" onClick={() => handleListChanged("#tab_1", ".tab")}/>
-                <Button id="tab_2" text="5 дней" onClick={() => handleListChanged("#tab_2", ".tab")}/>
+                <Button id="tab_1" text="24 hours" onClick={() => handleListChanged("#tab_1", ".tab")}/>
+                <Button id="tab_2" text="5 days" onClick={() => handleListChanged("#tab_2", ".tab")}/>
             </div>
             <div className="weather-list">
                 {Lists[listIdButton]}
