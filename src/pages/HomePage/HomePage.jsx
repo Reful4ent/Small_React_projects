@@ -4,6 +4,7 @@ import {fetchCurrentCityWeather,fetchFiveDaysWeather} from "../../shared/api/fet
 import WeatherCard from "../../widgets/WeatherCard/WeatherCard.jsx";
 import WeatherConditionCard from "../../widgets/WeatherCondCard/WeatherCondCard.jsx";
 import "./HomePage.css"
+import "/src/app/styles.css"
 import Button from "../../shared/ui/Button/Tab.jsx";
 import WeatherPerDayList from "../../widgets/WeatherPerDay/WeatherPerDayList/WeatherPerDayList.jsx";
 import WeatherFiveDaysList from "../../widgets/WeatherFiveDays/WeatherFiveDaysList/WeatherFiveDaysList.jsx";

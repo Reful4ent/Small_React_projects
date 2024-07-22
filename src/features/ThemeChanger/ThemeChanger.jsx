@@ -6,17 +6,16 @@ export const ThemeProvider = ({children}) =>  {
     const [theme,setTheme] = useLocalStorage('theme','light');
 
     const components = [
-        '.body-background',
+        'body',
         '.city-info-text',
         '.text-card.city-lat',
         '.text-card.city-lon',
         '.text-card.weather-today',
-        '.text-card.we  ather-city',
+        '.text-card.weather-city',
         '.text-date',
         '.text-temp',
         '.per-day-item',
         '.five-day-item',
-        '.tab'
     ]
 
     useEffect(() => {
@@ -25,7 +24,7 @@ export const ThemeProvider = ({children}) =>  {
         } else  {
             components.forEach(component => document.querySelectorAll(component).forEach(elem => elem.classList.remove("black")))
         }
-    }, [theme]);
+    }, [theme,components]);
 
     return (
         <>

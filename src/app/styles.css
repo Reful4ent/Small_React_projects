@@ -1,13 +1,23 @@
 body{
     margin: 0px;
     transition: 0.5s;
-    --text-card-city-lat:white;
-    --tabs-text: #white;
+    --city-info-text: black;
+    --tabs-color: black;
+    --text-day-color: black;
+    ---text-card-color: black;
+    --text-card-lat-lon-color: black;
+    --per-day-item-background:rgba(28%, 58%, 100%, 0.2);
+    --tabs-background-color: white;
 }
 
 body.black{
     background-color: #0D1117;
-    --text-card-city-lat: #939CB0;
     transition: 0.5s;
-    --tabs-text: #2E3035;
+    --city-info-text: white;
+    --tabs-color: white;
+    --text-day-color: white;
+    --text-card-color: white;
+    --text-card-lat-lon-color: #939CB0;
+    --tabs-background-color: #2E3035;
+    --per-day-item-background:#2E3035;
 }

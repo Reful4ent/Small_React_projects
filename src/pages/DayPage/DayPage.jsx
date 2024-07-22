@@ -7,6 +7,7 @@ import "./DayPage.css"
 import {getImage} from "../../entities/Weather/WeatherParams.js";
 import {windChecker} from "../../entities/Weather/WindChecker.js";
 import WeatherFullCard from "../../widgets/WeatherFullCard/WeatherFullCard.jsx";
+import "/src/app/styles.css"
 
 
 

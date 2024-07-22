@@ -58,6 +58,7 @@
     font-family: Montserrat;
     font-size: 16px;
     transition: 0.5s;
+    color: var(--city-info-text);
 }
 
 .city-info__background {
@@ -66,9 +67,4 @@
     height: 202px;
     width: 460px;
     left: 50%;
-}
-
-.city-info-text.black{
-    color: white;
-    transition: 0.5s;
 }

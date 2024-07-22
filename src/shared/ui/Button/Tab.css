@@ -10,20 +10,16 @@
     box-shadow: 2px 5px 5px 2px rgba(180,180,180,0.25);
     margin: 10px;
     margin-top: 20px;
+    color: var(--tabs-color);
+    background-color: var(--tabs-background-color);
 }
 
 .tab:first-child{
     margin-left: 30px;
 }
 
-.tab.active, .tab.active.black{
+.tab.active{
     background-color: #4793FF;
     color: white;
     box-shadow: 2px 5px 5px 2px rgba(28%, 58%, 100%, 0.15);
-}
-
-
-.tab.black{
-    color: white;
-    background-color: #2E3035;
 }

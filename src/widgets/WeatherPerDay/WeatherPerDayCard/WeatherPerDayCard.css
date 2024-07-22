@@ -5,9 +5,9 @@
 }
 
 .per-day-item{
-    background-color: rgba(28%, 58%, 100%, 0.2);
     border-radius: 20px;
     transition: 0.5s;
+    background-color: var(--per-day-item-background);
 }
 
 .per-day-item:hover{
@@ -28,6 +28,7 @@
     padding-top: 10px;
     font-size: 18px;
     font-weight: bold;
+    color: var(--text-day-color);
 }
 
 .text-weather{
@@ -38,6 +39,7 @@
 .text-temp{
     font-size: 18px;
     font-weight: bold;
+    color: var(--text-day-color);
 }
 
 .text-feels-temp{
@@ -52,10 +54,4 @@
 }
 
 
-.text-date.black, .text-temp.black {
-    color: white;
-}
 
-.per-day-item.black{
-    background-color: #2E3035;
-}

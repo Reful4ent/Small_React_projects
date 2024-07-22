@@ -66,20 +66,17 @@
 
 .weather-today {
     margin-bottom: 10px;
+    color: var(--text-card-color);
 }
 
 .weather-city {
     font-size: 28px;
     font-style: oblique;
     font-weight: bold;
+    color: var(--text-card-color);
 }
 
 
-.text-card.city-lat.black, .text-card.city-lon.black{
-    color: #939CB0;
-    transition: 0.5s;
-}
-.text-card.weather-today.black, .text-card.weather-city.black {
-    color: white;
-    transition: 0.5s;
+.text-card.city-lat, .text-card.city-lon{
+    color: var(--text-card-lat-lon-color);
 }

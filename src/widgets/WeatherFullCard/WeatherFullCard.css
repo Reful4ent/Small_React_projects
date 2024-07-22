@@ -12,10 +12,11 @@
     padding: 20px;
 }
 
-.city-info-text{
+.city-info-text-today{
     font-family: Montserrat;
     font-size: 16px;
     transition: 0.5s;
+    color: var(--city-info-text);
 }
 
 .city-info-text.today{

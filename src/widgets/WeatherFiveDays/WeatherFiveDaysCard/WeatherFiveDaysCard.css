@@ -8,6 +8,7 @@
     background-color: rgba(28%, 58%, 100%, 0.2);
     border-radius: 20px;
     transition: 0.5s;
+    background-color: var(--per-day-item-background);
 }
 
 .five-day-item:hover{
@@ -29,6 +30,7 @@
     font-size: 18px;
     font-weight: bold;
     padding-bottom: 22px;
+    color: var(--text-day-color);
 }
 
 .text-weather{
@@ -39,6 +41,7 @@
 .text-temp{
     font-size: 18px;
     font-weight: bold;
+    color: var(--text-day-color);
 }
 
 .text-feels-temp{
@@ -52,10 +55,3 @@
     padding-left: 20px;
 }
 
-.text-date-five.black, .text-temp.black {
-    color: white;
-}
-
-.five-day-item.black{
-    background-color: #2E3035;
-}
