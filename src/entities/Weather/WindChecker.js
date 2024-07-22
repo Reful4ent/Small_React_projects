@@ -1,4 +1,3 @@
-
 const windDirectionUS = {
     0: "north",
     45: "northeast",
@@ -24,12 +23,11 @@ const windDirectionRU = {
 }
 
 
-
 export const windChecker = (deg, lang) => {
     let direction = checkLang(lang);
 
-    for(let value of Object.keys(direction)) {
-        if(deg <= value) {
+    for (let value of Object.keys(direction)) {
+        if (deg <= value) {
             return direction[value];
         }
     }

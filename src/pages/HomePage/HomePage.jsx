@@ -1,15 +1,17 @@
-import Header from "../../widgets/Header/Header.jsx";
 import {useCallback, useEffect, useState} from "react";
-import {fetchCurrentCityWeather,fetchFiveDaysWeather} from "../../shared/api/fetchWeather.js";
+import {fetchCurrentCityWeather, fetchFiveDaysWeather} from "../../shared/api/fetchWeather.js";
+
+import Header from "../../widgets/Header/Header.jsx";
 import WeatherCard from "../../widgets/WeatherCard/WeatherCard.jsx";
 import WeatherConditionCard from "../../widgets/WeatherCondCard/WeatherCondCard.jsx";
-import "./HomePage.css"
-import "/src/app/styles.css"
 import Button from "../../shared/ui/Button/Tab.jsx";
 import WeatherPerDayList from "../../widgets/WeatherPerDay/WeatherPerDayList/WeatherPerDayList.jsx";
 import WeatherFiveDaysList from "../../widgets/WeatherFiveDays/WeatherFiveDaysList/WeatherFiveDaysList.jsx";
 
-export default function HomePage(){
+import "./HomePage.css"
+import "/src/app/styles.css"
+
+export default function HomePage() {
 
     const [cityParams, setCityParams] = useState(null)
     const [cityWeatherPerDay, setCityWeatherPerDay] = useState([]);
@@ -20,20 +22,19 @@ export default function HomePage(){
     const [listIdButton, setListIdButton] = useState("#tab_1");
 
     const Lists = {
-        "#tab_1" : <WeatherPerDayList perDayParams={cityWeatherPerDay} isLoad={loading}/>,
-        "#tab_2" : <WeatherFiveDaysList fiveDayParams={cityWeatherFiveDay} isLoad={loading}/>
+        "#tab_1": <WeatherPerDayList perDayParams={cityWeatherPerDay} isLoad={loading}/>,
+        "#tab_2": <WeatherFiveDaysList fiveDayParams={cityWeatherFiveDay} isLoad={loading}/>
     }
 
-    function handleListChanged(idButton,classNameButton){
+    function handleListChanged(idButton, classNameButton) {
         document.querySelectorAll(classNameButton).forEach(elem => elem.classList.remove("active"));
         document.querySelector(idButton).classList.add("active");
         setListIdButton(idButton);
     }
 
-    const fetchData = useCallback(async (city,state,country) => {
-        await fetchCurrentCityWeather(city,state,country, 'us')
+    const fetchData = useCallback(async (city, state, country) => {
+        await fetchCurrentCityWeather(city, state, country, 'us')
             .then((response) => {
-                console.log(response);
                 setCityParams({
                     name: response.name,
                     country: response.sys.country,
@@ -48,27 +49,29 @@ export default function HomePage(){
                 });
             });
 
-        await fetchFiveDaysWeather(city,state,country,'us')
+        await fetchFiveDaysWeather(city, state, country, 'us')
             .then((response) => {
+
                 let items = [];
                 for (let i = 0; i < (response.list.length / 5); i++) {
                     items.push(response.list[i]);
                 }
                 setCityWeatherPerDay(items);
-                console.log(response);
+
                 let items_2 = []
-                for (let i = 0; i < response.list.length; i+=8){
+                for (let i = 0; i < response.list.length; i += 8) {
                     items_2.push(response.list[i]);
                 }
                 setCityWeatherFiveDay(items_2);
+
                 setLoading(true);
             })
-    },[])
+    }, [])
 
-    useEffect( () => {
+    useEffect(() => {
         setLoading(false);
-        fetchData('Moscow','','RU');
-    },[fetchData])
+        fetchData('Moscow', 'moscow', 'ru');
+    }, [fetchData])
 
     return (
         <>
@@ -78,8 +81,8 @@ export default function HomePage(){
                 <WeatherConditionCard cityParams={cityParams} isLoad={loading}/>
             </div>
             <div className="button-list">
-                <Button id="tab_1" text="24 Часа" onClick={() => handleListChanged("#tab_1",".tab")}/>
-                <Button id="tab_2" text="5 дней" onClick={() => handleListChanged("#tab_2",".tab")}/>
+                <Button id="tab_1" text="24 Часа" onClick={() => handleListChanged("#tab_1", ".tab")}/>
+                <Button id="tab_2" text="5 дней" onClick={() => handleListChanged("#tab_2", ".tab")}/>
             </div>
             <div className="weather-list">
                 {Lists[listIdButton]}

@@ -1,9 +1,10 @@
 import {createContext, useEffect} from "react";
 import {useLocalStorage} from "../../shared/hooks/useLocalStorage.js";
+
 export const ThemeContext = createContext();
 
-export const ThemeProvider = ({children}) =>  {
-    const [theme,setTheme] = useLocalStorage('theme','light');
+export const ThemeProvider = ({children}) => {
+    const [theme, setTheme] = useLocalStorage('theme', 'light');
 
     const components = [
         'body',
@@ -19,12 +20,12 @@ export const ThemeProvider = ({children}) =>  {
     ]
 
     useEffect(() => {
-        if(theme === 'dark') {
+        if (theme === 'dark') {
             components.forEach(component => document.querySelectorAll(component).forEach(elem => elem.classList.add("black")))
-        } else  {
+        } else {
             components.forEach(component => document.querySelectorAll(component).forEach(elem => elem.classList.remove("black")))
         }
-    }, [theme,components]);
+    }, [theme, components]);
 
     return (
         <>

@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import "./GoBackButton.css"
 
-export default function GoBackButton(){
+export default function GoBackButton() {
     const navigate = useNavigate();
     return (
         <>

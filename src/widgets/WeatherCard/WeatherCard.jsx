@@ -1,10 +1,9 @@
-import "./WeatherCard.css"
-import "/src/app/styles.css"
 import {getImage} from "../../entities/Weather/WeatherParams.js";
 import Loading from "../../shared/ui/Loading/Loading.jsx";
+import "./WeatherCard.css"
+import "/src/app/styles.css"
 
-//<img className="weather-icon" src={imgConverter[cityParams.icon]}/>
-export default function WeatherCard({cityParams,isLoad}) {
+export default function WeatherCard({cityParams, isLoad}) {
     return (
         <>
             <div className={isLoad ? "weather-card" : "weather-card weather-card_loading"}>
