@@ -4,20 +4,20 @@ import WeatherFiveDaysCard from "../WeatherFiveDaysCard/WeatherFiveDaysCard.jsx"
 import WeatherPerDayCard from "../../WeatherPerDay/WeatherPerDayCard/WeatherPerDayCard.jsx";
 import Loading from "../../../shared/ui/Loading/Loading.jsx";
 
-export default function WeatherFiveDaysList({fiveDayParams, isLoad,themeIsBlack}){
+export default function WeatherFiveDaysList({fiveDayParams, isLoad}){
     return(
         <>
             <ul className={isLoad ? "main__weather-list" : "main__weather-list loading"}>
-                {isLoad ? (<FiveDayList fiveDayParams={fiveDayParams} themeIsBlack={themeIsBlack}/>) : (<Loading/>)}
+                {isLoad ? (<FiveDayList fiveDayParams={fiveDayParams}/>) : (<Loading/>)}
             </ul>
         </>
     )
 }
-function FiveDayList({fiveDayParams,themeIsBlack}){
+function FiveDayList({fiveDayParams}){
     return (
         <>
             {fiveDayParams.map((item,index) => (
-                <WeatherFiveDaysCard key={index} id={index} fiveDayParams={item} themeIsBlack={themeIsBlack}/>
+                <WeatherFiveDaysCard key={index} id={index} fiveDayParams={item}/>
             ))}
         </>
     )

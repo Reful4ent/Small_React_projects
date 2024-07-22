@@ -1,0 +1,26 @@
+.full-info-day__card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 30px;
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 2px 2px 2px 1px rgba(71%, 71%, 71%, 0.15),
+    -2px 2px 2px 1px rgba(71%, 71%, 71%, 0.15),
+    -2px -2px 2px 1px rgba(71%, 71%, 71%, 0.15),
+    2px -2px 2px 1px rgba(71%, 71%, 71%, 0.15);
+    padding: 20px;
+}
+
+.city-info-text{
+    font-family: Montserrat;
+    font-size: 16px;
+    transition: 0.5s;
+}
+
+.city-info-text.today{
+    color: #4793FF;
+    font-weight: bold;
+    font-size: 26px;
+}
+

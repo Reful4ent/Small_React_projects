@@ -1,0 +1,13 @@
+body{
+    margin: 0px;
+    transition: 0.5s;
+    --text-card-city-lat:white;
+    --tabs-text: #white;
+}
+
+body.black{
+    background-color: #0D1117;
+    --text-card-city-lat: #939CB0;
+    transition: 0.5s;
+    --tabs-text: #2E3035;
+}

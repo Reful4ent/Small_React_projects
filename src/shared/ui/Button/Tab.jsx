@@ -1,6 +1,6 @@
 
 import "./Tab.css"
-
+import "/src/app/styles.css"
 
 export default function Tab({id,text,onClick}){
     return (

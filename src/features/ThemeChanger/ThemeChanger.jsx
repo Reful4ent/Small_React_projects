@@ -1,9 +1,9 @@
-import {createContext, useEffect, useState} from "react";
+import {createContext, useEffect} from "react";
 import {useLocalStorage} from "../../shared/hooks/useLocalStorage.js";
 export const ThemeContext = createContext();
 
 export const ThemeProvider = ({children}) =>  {
-    const [theme,setTheme] = useState('light');
+    const [theme,setTheme] = useLocalStorage('theme','light');
 
     const components = [
         '.body-background',
@@ -11,7 +11,7 @@ export const ThemeProvider = ({children}) =>  {
         '.text-card.city-lat',
         '.text-card.city-lon',
         '.text-card.weather-today',
-        '.text-card.weather-city',
+        '.text-card.we  ather-city',
         '.text-date',
         '.text-temp',
         '.per-day-item',
@@ -21,9 +21,9 @@ export const ThemeProvider = ({children}) =>  {
 
     useEffect(() => {
         if(theme === 'dark') {
-            components.forEach(component => document.querySelectorAll(component).forEach(elem => elem.classList.remove("black")))
-        } else  {
             components.forEach(component => document.querySelectorAll(component).forEach(elem => elem.classList.add("black")))
+        } else  {
+            components.forEach(component => document.querySelectorAll(component).forEach(elem => elem.classList.remove("black")))
         }
     }, [theme]);
 

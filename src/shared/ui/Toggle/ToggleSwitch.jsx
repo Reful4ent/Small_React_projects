@@ -1,9 +1,17 @@
 import "./ToggleSwitch.css"
-import {useState} from "react";
-import ThemeChanger from "../../../features/ThemeChanger/ThemeChanger.js";
+import {useContext, useState} from "react";
+import {ThemeContext} from "../../../features/ThemeChanger/ThemeChanger.jsx";
 
 
-export default function ToggleSwitch({themeIsBlack,handleThemeChanged}) {
+export default function ToggleSwitch() {
+    const [theme,setTheme] = useContext(ThemeContext);
+    const [themeIsBlack, setThemeIsBlack] = useState(theme === "dark");
+
+    const handleThemeChanged = () => {
+        setTheme(theme === "light" ? "dark" : "light");
+        setThemeIsBlack(theme === 'light' ? true : false);
+    }
+
     return (
         <>
             <label className="switch">

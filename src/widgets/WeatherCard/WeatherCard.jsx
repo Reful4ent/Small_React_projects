@@ -1,4 +1,5 @@
 import "./WeatherCard.css"
+import "/src/app/styles.css"
 import {getImage} from "../../entities/Weather/WeatherParams.js";
 import Loading from "../../shared/ui/Loading/Loading.jsx";
 
