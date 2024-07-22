@@ -10,10 +10,9 @@ Weather for today is a small website showing weather characteristics in any city
 * Also: React Router v6  
 
 ### Demo screenshots:  
-![image_2024-07-22_20-47-00](https://github.com/user-attachments/assets/c112a57d-b0a7-4e4b-ad86-da3b231c6994)
-![image_2024-07-22_20-47-24](https://github.com/user-attachments/assets/e24f88c1-b742-4cd7-9309-7633c827c9af)
-![image_2024-07-22_20-47-36](https://github.com/user-attachments/assets/910a09e4-89a5-4fd3-ba3e-3ffc8854a758)
-![image_2024-07-22_20-46-46](https://github.com/user-attachments/assets/612fb218-befb-485c-92d9-bd653b14985c)
-![image_2024-07-22_20-46-31](https://github.com/user-attachments/assets/5b3c7d85-f488-4a0f-87da-3a747ada0a78)
-
+![image_2024-07-22_22-31-32](https://github.com/user-attachments/assets/5c2da493-4849-43a1-a387-ed774b60ad13)
+![image_2024-07-22_22-33-06](https://github.com/user-attachments/assets/ff4cc21a-e16d-46ff-ab46-856c269eacc0)
+![image_2024-07-22_22-33-26](https://github.com/user-attachments/assets/c5717674-7310-49c6-9214-f0e010684c57)
+![image_2024-07-22_22-33-37](https://github.com/user-attachments/assets/0b11800a-b1cc-4bae-aaf0-e3e9d2979cda)
+![image_2024-07-22_22-33-59](https://github.com/user-attachments/assets/bd7031a5-ad84-4ee8-922b-27f258549c8e)
 
