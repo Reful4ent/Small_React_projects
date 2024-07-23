@@ -1,5 +1,7 @@
 import {useEffect} from "react";
 import {fetchAllItems} from "../../shared/api/fetchShop.js";
+import {Header} from "../../widgets/Header/Header.jsx";
+
 
 
 export default function HomePage(){
@@ -12,6 +14,7 @@ export default function HomePage(){
 
     return (
         <>
+            <Header></Header>
         </>
     )
 }
