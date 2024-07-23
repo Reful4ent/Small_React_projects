@@ -2,4 +2,4 @@
 
 - Game of Life
 - Weather forecast
-- Pizza shop
+- Shop
