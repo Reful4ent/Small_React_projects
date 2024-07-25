@@ -4,7 +4,7 @@ import {Header} from "../../widgets/Header/Header.jsx";
 
 
 
-export default function HomePage(){
+export const HomePage = () =>{
 
     useEffect(() => {
         fetchAllItems().then((responce) => {

@@ -1,4 +1,4 @@
-import HomePage from "../pages/HomePage/HomePage.jsx";
+import {HomePage} from "../pages/HomePage/HomePage.jsx";
 import "./App.scss"
 
 
