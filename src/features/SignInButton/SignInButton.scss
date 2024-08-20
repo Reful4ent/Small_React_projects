@@ -1,0 +1,13 @@
+.sign-in-button {
+  background-color: #7400b8;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  width: 20%;
+  height: 70%;
+  font-family: Urbanist;
+  font-size: 22px;
+  &:hover {
+    background-color: #6400a8
+  }
+}

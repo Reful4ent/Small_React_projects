@@ -1,6 +1,9 @@
 .header{
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
-  justify-content: space-around;
+  justify-items: center;
+  justify-content: end;
   padding: 5px 40px 5px 40px;
+  border-bottom: 1px solid #000000;
 }
