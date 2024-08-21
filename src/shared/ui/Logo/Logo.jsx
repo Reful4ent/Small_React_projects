@@ -3,7 +3,7 @@ import "./Logo.scss"
 export const Logo = () => {
     return (
         <>
-            <div className="logo">
+            <div className="header__logo">
                 <svg className="logo__image" viewBox="0 0 15 15" version="1.1" id="shop"
                      xmlns="http://www.w3.org/2000/svg">
                     <path

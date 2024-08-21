@@ -8,7 +8,7 @@ export const ThemeProvider = ({ children }) => {
     const [theme, setTheme] = useLocalStorage('theme','light');
 
     const components = [
-
+        'body',
     ]
 
     useEffect(() => {
