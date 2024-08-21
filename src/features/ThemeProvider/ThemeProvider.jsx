@@ -17,7 +17,7 @@ export const ThemeProvider = ({ children }) => {
         } else {
             components.forEach(component => document.querySelectorAll(component).forEach(el => el.classList.remove("dark")));
         }
-    }, []);
+    }, [theme]);
 
     return(
         <>

@@ -1,10 +1,14 @@
 .theme-button{
-  height: 40px;
-  width: 40px;
+  $size: 40px;
+  height: $size;
+  width: $size;
+  border: 1px solid var(--theme-color);
+  border-radius: $size * 0.2;
   background-color: transparent;
-  border: 1px solid black;
-  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+  .theme-button__img{
+    fill: var(--theme-color);
+  }
 }

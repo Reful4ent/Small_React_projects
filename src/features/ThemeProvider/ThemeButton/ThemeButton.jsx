@@ -16,9 +16,9 @@ export const ThemeButton = () => {
     return (
         <>
             <button className="theme-button" type="button" onClick={themeHandleChange}>
-                <svg fill="#000000" height="800px" width="800px" version="1.1" id="Capa_1"
-                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                     viewBox="0 0 457.32 457.32" xml:space="preserve">
+                <svg className="theme-button__img" height="800px" width="800px" version="1.1" id="Capa_1"
+                     xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 457.32 457.32" >
                 <g id="XMLID_467_">
 	                <path id="XMLID_922_" d="M228.66,112.692c-63.945,0-115.968,52.022-115.968,115.967c0,63.945,52.023,115.968,115.968,115.968
 		            s115.968-52.023,115.968-115.968C344.628,164.715,292.605,112.692,228.66,112.692z"/>

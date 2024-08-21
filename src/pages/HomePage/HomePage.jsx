@@ -14,7 +14,7 @@ export const HomePage = () =>{
 
     return (
         <>
-            <Header></Header>
+
         </>
     )
 }

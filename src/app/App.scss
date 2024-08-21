@@ -7,12 +7,23 @@
   url('/public/fonts/Urbanist/Urbanist-VariableFont_wght.eot') format('eot');
 }
 
+$text-white: #fff;
+$text-dark: #000;
+$theme-white: #fff;
+$theme-dark: #000;
+
+
 body{
   margin: 0px;
   transition: 0.5s;
+  background-color: $theme-white;
+  --text-color: #{$text-dark};
+  --theme-color: #{$theme-dark};
 }
 
 body.dark{
-  background-color: #0D1117;
+  background-color: $theme-dark;
   transition: 0.5s;
+  --text-color: #{$text-white};
+  --theme-color: #{$theme-white};
 }
