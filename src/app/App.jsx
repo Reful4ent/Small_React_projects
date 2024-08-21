@@ -1,15 +1,15 @@
-import {HomePage} from "../pages/HomePage/HomePage.jsx";
+
 import "./App.scss"
 import {ThemeProvider} from "../features/ThemeProvider/ThemeProvider.jsx";
-import {SignInPage} from "../pages/SignInPage/SignInPage.jsx";
-import {MainLayout} from "./layouts/mainLayout.jsx";
+import {RouterProvider} from "react-router-dom";
+import {router} from "./router/Router.jsx";
 
 
 export default function App() {
     return (
         <>
             <ThemeProvider>
-                <MainLayout children={<SignInPage/>}/>
+                <RouterProvider router={router}></RouterProvider>
             </ThemeProvider>
         </>
     )

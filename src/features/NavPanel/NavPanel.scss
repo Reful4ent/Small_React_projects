@@ -17,6 +17,11 @@
       margin: 10px 30px 10px 30px;
       color: var(--text-color);
 
+      .list-item__link{
+        text-decoration: none;
+        color: var(--text-color);
+      }
+
       &:first-child{
         margin-left: 60px;
       }

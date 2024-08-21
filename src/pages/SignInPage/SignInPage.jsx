@@ -4,7 +4,7 @@ export const SignInPage = () => {
 
     return(
         <>
-
+            <p>signin</p>
         </>
     )
 }
