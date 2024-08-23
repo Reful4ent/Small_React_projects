@@ -1,5 +1,5 @@
 .sign-in-button {
-  background-color: #7400b8;
+  background-color: var(--purple-color);
   color: #fff;
   border: none;
   border-radius: 15px;
@@ -8,6 +8,6 @@
   font-family: Urbanist;
   font-size: 22px;
   &:hover {
-    background-color: #6400a8
+    background-color: var(--purple-color-hover);
   }
 }
