@@ -1,5 +1,14 @@
 import {MainLayout} from "../layouts/MainLayout.jsx";
-import {AboutPage, ErrorPage, HomePage, ProductsPage, ProfilePage, SignInPage, SignUpPage} from "./lazyPages.jsx";
+import {
+    AboutPage,
+    ErrorPage,
+    FullProductPage,
+    HomePage,
+    ProductsPage,
+    ProfilePage,
+    SignInPage,
+    SignUpPage
+} from "./lazyPages.jsx";
 import {createBrowserRouter} from "react-router-dom";
 
 
@@ -18,6 +27,11 @@ export const router = createBrowserRouter([{
         {
             path: 'products',
             element: <ProductsPage/>,
+
+        },
+        {
+            path: 'products/:id',
+            element: <FullProductPage/>
         },
         {
             path: 'about',

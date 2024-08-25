@@ -5,12 +5,13 @@
   margin: 40px 300px 0px 300px;
   padding: 30px 0px 30px 0px;
   border: {
-    top: 1px solid black;
-    bottom: 1px solid black;
+    top: 1px solid var(--theme-color);
+    bottom: 1px solid var(--theme-color);
   }
 
   .footer-link{
     transition: 0.2s;
+    color: var(--text-color);
     font: {
       family: Urbanist;
       size: 16px;
@@ -32,5 +33,6 @@
     display: flex;
     align-items: center;
     font-family: Urbanist;
+    color: var(--text-color);
   }
 }

@@ -1,5 +1,6 @@
 import {Loader} from "../../shared/ui/Loader/Loader.jsx";
 import "./ProductCard.scss"
+import {Link} from "react-router-dom";
 
 export const ProductCard = ({ product, isLoad }) => {
 
@@ -18,7 +19,9 @@ export const ProductCard = ({ product, isLoad }) => {
 export const CardInfo = ({product}) => {
     return (
         <>
-            <img className="product-card__image" src={product.images[0]} alt={product.name}/>
+            <Link to={'/products/'+product.id} state={{ product: product }}>
+                <img className="product-card__image" src={product.images[0]} alt={product.name}/>
+            </Link>
             <p className="product-card__text title">{product.title}</p>
             <p className="product-card__text description">{product.description}</p>
             <p className="product-card__text category">{product.category.name}</p>
