@@ -17,7 +17,10 @@ $theme-dark: #000;
 $shadow-white: #00000026;
 $shadow-dark: #fff;
 
-
+html, body{
+  height: 100%;
+  width: 100%;
+}
 
 body{
   margin: 0px;
@@ -28,6 +31,7 @@ body{
   --purple-color: #{$custom-purple};
   --purple-color-hover: #{$custom-purple-hover};
   --shadow-color: #{$shadow-white};
+  --border-color: #{$shadow-white};
 }
 
 body.dark{
@@ -38,4 +42,5 @@ body.dark{
   --purple-color: #{$custom-purple};
   --purple-color-hover: #{$custom-purple-hover};
   --shadow-color: #{$shadow-dark};
+  --border-color: #{$shadow-dark};
 }

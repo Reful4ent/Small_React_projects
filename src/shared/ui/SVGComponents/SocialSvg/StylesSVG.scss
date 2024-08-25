@@ -1,0 +1,11 @@
+.link-svg{
+  $size: 35px;
+  height: $size;
+  width: $size;
+  transition: 0.2s;
+  margin: 10px;
+  &:hover{
+    opacity: 0.7;
+    transition: 0.2s;
+  }
+}

@@ -1,0 +1,9 @@
+.social-links-list{
+  padding: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  .social-link__item{
+    list-style: none;
+  }
+}

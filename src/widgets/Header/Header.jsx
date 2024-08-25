@@ -1,4 +1,4 @@
-import {Logo} from "../../shared/ui/Logo/Logo.jsx";
+import {Logo} from "../../shared/ui/SVGComponents/Logo/Logo.jsx";
 import "./Header.scss"
 import {NavPanel} from "../../features/NavPanel/NavPanel.jsx";
 import {SignInButton} from "../../features/SignInButton/SignInButton.jsx";
