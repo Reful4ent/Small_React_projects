@@ -9,8 +9,10 @@ export const FullProductPage = () => {
     return (
         <>
             <div className="full-product">
-                <GoBackButton/>
-                <FullProductCard product={location.state.product} />
+                <div className="full-product-container">
+                    <GoBackButton/>
+                    <FullProductCard product={location.state.product} />
+                </div>
             </div>
         </>
     )

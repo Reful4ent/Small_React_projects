@@ -23,34 +23,43 @@
     font: {
       family: Urbanist;
     }
-  }
 
-  .product-card__text.description, .product-card__text.title {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+    &.description, &.title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-  .product-card__text.description { color: #616773; }
+    &.description { color: #616773; }
 
-  .product-card__text.title {
-    font: {
-      size: 22px;
-      weight: 500;
-    };
-  }
+    &.title {
+      font: {
+        size: 22px;
+        weight: 500;
+      };
+    }
 
-  .product-card__text.price {
-    margin-bottom: 10px;
-    font: {
-      size: 18px;
-      weight: 600;
+    &.price {
+      margin-bottom: 10px;
+      font: {
+        size: 18px;
+        weight: 600;
+      }
+    }
+
+    &.category{
+      text-decoration: underline;
     }
   }
 
-  .product-card__text.category{
-     text-decoration: underline;
-  }
+
+
+
+
+
+
+
+
 
   .product-card__add-btn {
     background-color: var(--purple-color);

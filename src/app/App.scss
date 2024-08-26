@@ -32,15 +32,16 @@ body{
   --purple-color-hover: #{$custom-purple-hover};
   --shadow-color: #{$shadow-white};
   --border-color: #{$shadow-white};
+
+  &.dark{
+    background-color: $theme-dark;
+    transition: 0.5s;
+    --text-color: #{$text-white};
+    --theme-color: #{$theme-white};
+    --purple-color: #{$custom-purple};
+    --purple-color-hover: #{$custom-purple-hover};
+    --shadow-color: #{$shadow-dark};
+    --border-color: #{$shadow-dark};
+  }
 }
 
-body.dark{
-  background-color: $theme-dark;
-  transition: 0.5s;
-  --text-color: #{$text-white};
-  --theme-color: #{$theme-white};
-  --purple-color: #{$custom-purple};
-  --purple-color-hover: #{$custom-purple-hover};
-  --shadow-color: #{$shadow-dark};
-  --border-color: #{$shadow-dark};
-}

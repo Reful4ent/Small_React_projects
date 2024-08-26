@@ -1,0 +1,76 @@
+.card-body{
+  margin: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1.8fr 2fr;
+  align-items: center;
+  justify-content: center;
+
+  .product-images{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    .product-image {
+      margin: 5px;
+      width: 40%;
+      border-radius: 10px;
+      &:hover, &:active, &:focus {
+        opacity: 0.7;
+      }
+    }
+  }
+
+  .product-image.current {
+    width: 90%;
+    border-radius: 10px;
+  }
+
+  .product-info{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .product-card__text{
+      font-family: Urbanist;
+
+      &.title {
+        font: {
+          weight: 900;
+          size:28px;
+        }
+      }
+
+      &.description { color: #616773; }
+
+      &.price {
+        font: {
+          size: 18px;
+          weight: 600;
+        }
+      }
+
+      &.category{
+        text-decoration: underline;
+      }
+    }
+
+    .product-card__add-btn {
+      margin-top: auto;
+      margin-bottom: 6px;
+      background-color: var(--purple-color);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      height: 10%;
+      font: {
+        family: Urbanist;
+        weight: bold;
+        size: 100%;
+      }
+
+      &:hover {
+        background-color: var(--purple-color-hover);
+      }
+    }
+  }
+
+}
