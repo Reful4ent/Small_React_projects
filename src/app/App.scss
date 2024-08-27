@@ -16,7 +16,9 @@ $theme-white: #fff;
 $theme-dark: #000;
 $shadow-white: #00000026;
 $shadow-dark: #fff;
-
+$categories-light: #fff;
+$categories-dark: #000;
+$categories-dark-start: #151515;
 html, body{
   height: 100%;
   width: 100%;
@@ -32,6 +34,8 @@ body{
   --purple-color-hover: #{$custom-purple-hover};
   --shadow-color: #{$shadow-white};
   --border-color: #{$shadow-white};
+  --categories-color-from: #{$shadow-white} ;
+  --categories-color-to: #{$categories-light};
 
   &.dark{
     background-color: $theme-dark;
@@ -42,6 +46,8 @@ body{
     --purple-color-hover: #{$custom-purple-hover};
     --shadow-color: #{$shadow-dark};
     --border-color: #{$shadow-dark};
+    --categories-color-from: #{$categories-dark-start};
+    --categories-color-to: #{$categories-dark};
   }
 }
 

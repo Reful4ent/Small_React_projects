@@ -3,7 +3,7 @@ import "./FullProductCard.scss"
 
 export const FullProductCard = ({product}) => {
 
-    const [currentImg, setCurrentImg] = useState(product.images[0]);
+    const [currentImg, setCurrentImg] = useState(product.attributes.images[0]);
 
     const handleImageClick = (image) => {
         setCurrentImg(image);
@@ -14,7 +14,7 @@ export const FullProductCard = ({product}) => {
         <>
             <div className="card-body">
                 <div className="product-images">
-                    {product.images.map((image, index) => (
+                    {product.attributes.images.map((image, index) => (
                         <img className="product-image" key={index} src={image} onClick={() => handleImageClick(image)}/>
                     ))}
                 </div>
@@ -22,10 +22,10 @@ export const FullProductCard = ({product}) => {
                     <img className="product-image current" src={currentImg} alt={product.title} />
                 </div>
                 <div className="product-info">
-                    <p className="product-card__text title">{product.title}</p>
-                    <p className="product-card__text description">{product.description}</p>
-                    <p className="product-card__text category">{product.category.name}</p>
-                    <p className="product-card__text price">Price: <br/>$ {product.price}</p>
+                    <p className="product-card__text title">{product.attributes.title}</p>
+                    <p className="product-card__text description">{product.attributes.description}</p>
+                    <p className="product-card__text category">{product.attributes.category.data.attributes.name}</p>
+                    <p className="product-card__text price">Price: <br/>$ {product.attributes.price}</p>
                     <button className="product-card__add-btn">Add</button>
                 </div>
             </div>

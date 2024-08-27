@@ -1,22 +1,41 @@
 import axios from "axios";
+import {token} from "./token.js";
+import {route} from "./route.js";
 
 
 export const fetchAllItems = async () => {
     try{
-        const response = await axios.get("https://api.escuelajs.co/api/v1/products");
+        const response = await axios.get(
+            route +
+            `products?populate=*`,
+        {
+            headers: {
+                'Authorization': `Bearer ` + token,
+            }
+        });
         const result = JSON.parse(response.request.response);
         return result ? result : null;
     } catch (error) {
         console.error(error)
         return null;
     }
-    /*try{
-        const url = "https://api.escuelajs.co/api/v1/products";
-        const response = await fetch(url);
-        const items = await response.json();
+}
 
-        return items ? items : null;
-    } catch (error) {
+export const fetchCategories = async () => {
+    try{
+        const response = await axios.get(
+            route +
+            `categories`,
+            {
+                headers: {
+                    'Authorization': `Bearer ` + token,
+                }
+            }
+        )
+        const result = JSON.parse(response.request.response);
+        return result ? result : null;
+    }  catch(error) {
+        console.error(error)
         return null;
-    }*/
+    }
 }

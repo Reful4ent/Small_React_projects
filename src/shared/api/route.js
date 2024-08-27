@@ -1,0 +1,1 @@
+export const route = 'http://192.168.1.54:1337/api/'
