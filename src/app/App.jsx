@@ -1,15 +1,18 @@
 
 import "./App.scss"
 import {ThemeProvider} from "../features/ThemeProvider/ThemeProvider.jsx";
-import {RouterProvider} from "react-router-dom";
+import {RouterProvider, useRoutes} from "react-router-dom";
 import {router} from "./router/Router.jsx";
+import {AuthProvider} from "./context/AuthProvider.jsx";
 
 
 export default function App() {
     return (
         <>
             <ThemeProvider>
-                <RouterProvider router={router}></RouterProvider>
+               <AuthProvider>
+                   {useRoutes(router)}
+               </AuthProvider>
             </ThemeProvider>
         </>
     )
