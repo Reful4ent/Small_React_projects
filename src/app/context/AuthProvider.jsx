@@ -6,10 +6,11 @@ import {route} from "../../shared/api/route.js";
 import {token} from "../../shared/api/token.js";
 
 
+
 export const AuthProvider = ({children}) => {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(localStorage.getItem("user") || null);
     const navigate = useNavigate();
-    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') || false);
+    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') || 'false');
 
     const signIn = async (data) => {
         try {

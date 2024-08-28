@@ -6,7 +6,7 @@ export const PrivateRoute = ({children}) => {
     const navigate = useNavigate();
     const auth = useAuth();
 
-    if(auth === null || auth.user === null)
+    if(auth === null || auth.user === null || auth.user === '')
         return <Navigate to="/auth/signIn" replace/>;
     return children;
 }

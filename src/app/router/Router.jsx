@@ -19,7 +19,7 @@ import {PrivateRoute} from "../../features/PrivateRoute/PrivateRoute.jsx";
 export const router =[
     {
         path: "/",
-        element: <PrivateRoute><MainLayout/></PrivateRoute>,
+        element: <MainLayout/>,
         errorElement: <ErrorPage/>,
         children: [
             {
@@ -41,12 +41,12 @@ export const router =[
             },
             {
                 path: 'profile',
-                element: <ProfilePage/>,
+                element: <PrivateRoute><ProfilePage/></PrivateRoute>,
             },
             {
                 path: '*',
                 element: <Navigate to="/" replace/>
-            }
+            },
         ]
     },
     {
