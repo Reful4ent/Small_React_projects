@@ -4,6 +4,7 @@ import {ProductCard} from "../../entities/ProductCard/ProductCard.jsx";
 import "./ProductPage.scss"
 import {ProductList} from "../../widgets/ProductList/ProductList.jsx";
 import {useLocation, useSearchParams} from "react-router-dom";
+import {GlassSVG} from "../../shared/ui/SVGComponents/Glass/GlassSVG.jsx";
 
 export const ProductsPage = () => {
 
@@ -12,14 +13,24 @@ export const ProductsPage = () => {
     const [categoryId, setCategoryId] = useState(0);
     const [isLoad, setIsLoad] = useState(false);
 
+    const [searchParams, setSearchParams] = useSearchParams();
+    const categoryIdQuery = searchParams.get("categoryId") || '';
+    const searchQuery = searchParams.get("searchQuery") || '';
+
     const handleCategoryClick = (id) => {
         setCategoryId(id);
-        if (id === 0) {
-
-        }
+        setSearchParams({categoryId: id});
     }
 
-    const [searchParams, setSearchParams] = useSearchParams();
+    const handleSearchClick = (e) =>{
+        e.preventDefault()
+
+        const form = e.target;
+        const query = form.search.value.toLowerCase();
+        setSearchParams({categoryId: categoryId, searchQuery: query});
+    }
+
+
 
     const fetchData = useCallback(async () => {
         await fetchAllItems().then((response) => {
@@ -40,7 +51,14 @@ export const ProductsPage = () => {
     return (
         <>
             <div className="main">
-                <ProductList products={listItems} isLoad={isLoad}/>
+                <div className="product-search-container">
+                    <form className="product-search" autoComplete="off" onSubmit={handleSearchClick}>
+                        <input className='product-search__input' placeholder='Search...' type='search' name='search'/>
+                        <button className="product-search__btn" type="submit"><GlassSVG/></button>
+                    </form>
+                </div>
+                <ProductList filterSearch={searchQuery} filterCategory={Number(categoryIdQuery)} products={listItems}
+                             isLoad={isLoad}/>
                 <div className="product-categories">
                     <div className="product-categories-container">
                         <p className="product-categories__text">Categories: </p>
