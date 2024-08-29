@@ -9,8 +9,9 @@ import {
     SignInPage,
     SignUpPage
 } from "./lazyPages.jsx";
-import {createBrowserRouter, Navigate} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import {PrivateRoute} from "../../features/PrivateRoute/PrivateRoute.jsx";
+import {SignLayout} from "../layouts/SignLayout.jsx";
 
 
 
@@ -45,20 +46,23 @@ export const router =[
             },
             {
                 path: '*',
-                element: <Navigate to="/" replace/>
+                element: <Navigate to="/home"/>
             },
         ]
     },
     {
-        path: 'auth',
-        element: <Navigate to="/auth/signIn"/>,
+        path: 'auth/',
+        element: <SignLayout/>,
+        errorElement: <ErrorPage/>,
+        children: [
+            {
+                path: "signIn",
+                element: <SignInPage/>,
+            },
+            {
+                path: "signUp",
+                element: <SignUpPage/>,
+            }
+        ]
     },
-    {
-        path: 'auth/signIn',
-        element: <SignInPage/>,
-    },
-    {
-        path: 'auth/signUp',
-        element: <SignUpPage/>,
-    }
     ]

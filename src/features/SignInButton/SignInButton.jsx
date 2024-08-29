@@ -7,7 +7,7 @@ export const SignInButton = () => {
 
     const handleSignIn = (e) => {
         e.preventDefault();
-        navigate("/auth/signIn");
+        navigate("auth/signIn");
     }
     return (
         <>

@@ -1,0 +1,14 @@
+.profile-button {
+  $size: 40px;
+  width: $size;
+  height: $size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: 1px solid var(--theme-color);
+  border-radius: 10px;
+  .profile-btn__image {
+    fill: var(--theme-color);
+  }
+}

@@ -1,0 +1,56 @@
+.sign-in-form {
+  display: flex;
+  flex-direction: column;
+
+  .sign-in__text {
+    margin: 5px 0px 5px 0px;
+    font: {
+      family: Urbanist;
+      size: 18px;
+    }
+  }
+
+  .sign-in__input {
+    margin: 5px 0px 5px 0px;
+    padding: 10px;
+    font: {
+      family: Urbanist;
+      size: 16px;
+    }
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    &:focus{
+      outline: var(--purple-color);
+      border-color: var(--purple-color);
+    }
+  }
+
+  .sign-in__error {
+    margin: 5px 0px 5px 0px;
+    color: #ae0303;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: {
+      family: Urbanist;
+      size: 14px;
+    }
+  }
+
+  .sign-in__btn {
+    margin: 10px 0px 10px 0px;
+    padding: 10px;
+    background-color: var(--purple-color);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font: {
+      family: Urbanist;
+      weight: 800;
+      size: 20px;
+    }
+    &:hover {
+      background-color: var(--purple-color-hover);
+    }
+  }
+}
