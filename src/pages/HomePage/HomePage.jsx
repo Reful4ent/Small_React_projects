@@ -1,14 +1,13 @@
-import {useEffect} from "react";
-import {fetchAllItems} from "../../shared/api/fetchShop.js";
-import {Header} from "../../widgets/Header/Header.jsx";
-
+import "./HomePage.scss"
 
 
 export const HomePage = () =>{
 
     return (
         <>
-            <p>home</p>
+            <div className="home-main">
+                <p>sadas</p>
+            </div>
         </>
     )
 }

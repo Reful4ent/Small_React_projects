@@ -9,38 +9,37 @@ import {token} from "../../shared/api/token.js";
 
 export const AuthProvider = ({children}) => {
     const navigate = useNavigate();
-    const [user, setUser] = useState(localStorage.getItem("user") || null);
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user") )|| null);
 
 
     const signIn = async (data) => {
         try {
             const response = await axios.get(
                 route +
-                `shop-users?filters[email][$eq]=${data.email}&filters[password][$eq]=${data.password}`,
+                `/api` +
+                `/shop-users?filters[email][$eq]=${data.email}&filters[password][$eq]=${data.password}&populate=*`,
                 {
                     headers: {
                         'Authorization': `Bearer ` + token,
                     }
                 }
             );
-            if (response.status === 200) {
-                console.log(response.status)
-                if (response.data.data.length !== 0) {
-                    const tempUser = {
-                        surname: response.data.data[0].attributes.surname,
-                        name: response.data.data[0].attributes.name,
-                        email: response.data.data[0].attributes.email,
-                        password: response.data.data[0].attributes.password,
-                        phone: response.data.data[0].attributes.phone,
-                        address: response.data.data[0].attributes.address,
-                    }
-                    setUser(tempUser);
-                    localStorage.setItem("user", JSON.stringify(tempUser));
-                    return true
-                } else {
-                    localStorage.removeItem("user");
+            if (response.status === 200 && response.data.data.length !== 0) {
+                const tempUser = {
+                    surname: response.data.data[0].attributes.surname,
+                    name: response.data.data[0].attributes.name,
+                    email: response.data.data[0].attributes.email,
+                    password: response.data.data[0].attributes.password,
+                    image: response.data.data[0].attributes.image.data?.attributes.url,
+                    phone: response.data.data[0].attributes.phone,
+                    address: response.data.data[0].attributes.address,
+                    orders: response.data.data[0].attributes.orders,
                 }
+                setUser(tempUser);
+                localStorage.setItem("user", JSON.stringify(tempUser));
+                return true
             }
+            localStorage.removeItem("user");
             return false;
         } catch (error) {
             console.error(error);
@@ -53,7 +52,8 @@ export const AuthProvider = ({children}) => {
 
             const isUserExist = await axios.get(
                 route +
-                `shop-users?filters[email][$eq]=${data.email}`,
+                `/api` +
+                `/shop-users?filters[email][$eq]=${data.email}`,
                 {
                     headers: {
                         'Authorization': `Bearer ` + token,
@@ -67,7 +67,8 @@ export const AuthProvider = ({children}) => {
 
             const response = await axios.post(
                 route +
-                'shop-users',
+                '/api' +
+                '/shop-users',
                 {
                     data: {
                         surname: data.surname,
@@ -88,6 +89,7 @@ export const AuthProvider = ({children}) => {
                     name: data.name,
                     email: data.email,
                     password: data.password,
+                    image: null,
                     phone: null,
                     address: null,
                     orders: null,
@@ -108,11 +110,17 @@ export const AuthProvider = ({children}) => {
         navigate('/home');
     }
 
+    //TODO: сделать запрос на обновление данных пользователя
+    const updateUser = async (data) => {
+
+    }
+
     const value = {
         user,
         signIn,
         signUp,
-        signOut
+        signOut,
+        updateUser
     }
 
     return(

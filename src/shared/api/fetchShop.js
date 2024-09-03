@@ -7,7 +7,8 @@ export const fetchAllItems = async () => {
     try{
         const response = await axios.get(
             route +
-            `products?populate=*`,
+            `/api` +
+            `/products?populate=*`,
         {
             headers: {
                 'Authorization': `Bearer ` + token,
@@ -25,7 +26,8 @@ export const fetchCategories = async () => {
     try{
         const response = await axios.get(
             route +
-            `categories`,
+            '/api' +
+            `/categories`,
             {
                 headers: {
                     'Authorization': `Bearer ` + token,

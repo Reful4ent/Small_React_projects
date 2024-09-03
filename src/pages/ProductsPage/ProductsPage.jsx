@@ -5,6 +5,8 @@ import "./ProductPage.scss"
 import {ProductList} from "../../widgets/ProductList/ProductList.jsx";
 import {useLocation, useSearchParams} from "react-router-dom";
 import {GlassSVG} from "../../shared/ui/SVGComponents/Glass/GlassSVG.jsx";
+import {CategoriesInput} from "../../features/CategoriesProduct/CategoriesInput.jsx";
+import {ProductSearchInput} from "../../features/ProductSearchInput/ProductSearchInput.jsx";
 
 export const ProductsPage = () => {
 
@@ -51,28 +53,10 @@ export const ProductsPage = () => {
     return (
         <>
             <div className="main">
-                <div className="product-search-container">
-                    <form className="product-search" autoComplete="off" onSubmit={handleSearchClick}>
-                        <input className='product-search__input' placeholder='Search...' type='search' name='search'/>
-                        <button className="product-search__btn" type="submit"><GlassSVG/></button>
-                    </form>
-                </div>
+                <ProductSearchInput onSubmit={handleSearchClick}/>
                 <ProductList filterSearch={searchQuery} filterCategory={Number(categoryIdQuery)} products={listItems}
                              isLoad={isLoad}/>
-                <div className="product-categories">
-                    <div className="product-categories-container">
-                        <p className="product-categories__text">Categories: </p>
-                        <ul className="product-categories__list">
-                            <li key={0} className="product-categories__list__item"
-                                onClick={() => handleCategoryClick(0)}>All
-                            </li>
-                            {categories.map((category, index) => (
-                                <li key={category.id} className="product-categories__list__item"
-                                    onClick={() => handleCategoryClick(category.id)}>{category.attributes.name}</li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
+                <CategoriesInput handleCategoryClick={handleCategoryClick} categories={categories} />
             </div>
         </>
     )

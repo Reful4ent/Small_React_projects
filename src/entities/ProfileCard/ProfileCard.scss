@@ -2,14 +2,55 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: {
-    top: 20px;
-  }
 
   .card-me{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     row-gap: 10px;
     column-gap: 30px;
+    margin: 10px;
+
+    .card-me__content{
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      width: 300px;
+      align-items: center;
+      border: 1px solid var(--border-color);
+      border-radius: 15px;
+
+      .content__profile-img{
+        $size: 250px;
+        width: $size;
+        height: $size;
+        border-radius: 50%;
+        border: 1px solid var(--border-color);
+        .content__profile-img__circle{
+          cx: $size/2;
+          cy: $size/2;
+          r: $size/2;
+        }
+      }
+
+      .content__profile-name{
+        align-self: start;
+        font: {
+          family: Urbanist;
+          size: 20px;
+          weight: bold;
+        }
+        margin: {
+          top: 20px;
+          bottom: 5px;
+        }
+      }
+    }
+
+    .card-me__window{
+      width: 950px;
+      border: 1px solid var(--border-color);
+      border-radius: 15px;
+    }
   }
 }
