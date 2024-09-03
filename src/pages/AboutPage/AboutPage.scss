@@ -1,0 +1,44 @@
+.about-main{
+  padding: {
+    top: 40px;
+    left: 300px;
+    right: 300px;
+  }
+
+  .about-main__h{
+    font: {
+      family: Urbanist;
+      weight: 700;
+      size: 32px;
+    };
+    color: var(--purple-color);
+  }
+
+  .about-main__p {
+    color: var(--text-color);
+    font: {
+      family: Urbanist;
+      size: 20px;
+    };
+  }
+
+  .frameworks-icons{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    .frameworks-icons__icon {
+      width: 20%;
+      height: 20%;
+    }
+  }
+
+  .backend-icons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .backend-icons__icon {
+      width: 10%;
+      height: 10%;
+    }
+  }
+}
