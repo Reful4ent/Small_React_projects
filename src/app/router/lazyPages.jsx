@@ -9,3 +9,4 @@ export const FullProductPage = lazy(() => import('/src/pages/FullProductPage/Ful
 export const SignInPage = lazy(() => import('/src/pages/SignInPage/SignInPage').then(m => ({default: m.SignInPage})));
 export const SignUpPage = lazy(() => import('/src/pages/SignUpPage/SignUpPage').then(m => ({default: m.SignUpPage})));
 export const ProfilePage = lazy(() => import('/src/pages/ProfilePage/ProfilePage').then(m => ({default: m.ProfilePage})));
+export const ShoppingCartPage = lazy(() => import('/src/pages/ShoppingCartPage/ShoppingCartPage').then(m => ({default: m.ShoppingCartPage})));

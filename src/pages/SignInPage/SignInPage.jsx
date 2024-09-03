@@ -1,5 +1,5 @@
 
-import {Logo} from "../../shared/ui/SVGComponents/Logo/Logo.jsx";
+import {Logo} from "../../shared/ui/Logo/Logo.jsx";
 import {Link} from "react-router-dom";
 import "./SignInPage.scss"
 import {SignInForm} from "../../widgets/SignIn/SignInForm.jsx";

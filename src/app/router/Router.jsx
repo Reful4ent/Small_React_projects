@@ -5,7 +5,7 @@ import {
     FullProductPage,
     HomePage,
     ProductsPage,
-    ProfilePage,
+    ProfilePage, ShoppingCartPage,
     SignInPage,
     SignUpPage
 } from "./lazyPages.jsx";
@@ -43,6 +43,10 @@ export const router =[
             {
                 path: 'profile',
                 element: <PrivateRoute><ProfilePage/></PrivateRoute>,
+            },
+            {
+                path: 'shoppingCart',
+                element: <PrivateRoute><ShoppingCartPage/></PrivateRoute>,
             },
             {
                 path: '*',

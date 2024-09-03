@@ -1,0 +1,13 @@
+.profile-main{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .profile-main__header{
+    font: {
+      family: Urbanist;
+      weight: 900;
+      size: 36px;
+    }
+  }
+}

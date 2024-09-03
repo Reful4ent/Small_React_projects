@@ -1,0 +1,12 @@
+.shopping-cart-button {
+  $size: 40px;
+  width: $size;
+  height: $size;
+  display: flex;
+  margin-left: 20px;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: 1px solid var(--theme-color);
+  border-radius: 10px;
+}

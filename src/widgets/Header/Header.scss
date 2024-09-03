@@ -14,4 +14,11 @@
     height: 100%;
     grid-column-gap: 20px;
   }
+
+  .header__profile-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
 }

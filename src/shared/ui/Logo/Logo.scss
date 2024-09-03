@@ -3,13 +3,6 @@
   align-items: center;
   flex-direction: row;
 
-  .logo__image{
-    $size: 50px;
-    width: $size;
-    height: $size;
-    margin-right: 10px;
-    fill: var(--purple-color);
-  }
 
   .logo__text{
     margin: 0px;

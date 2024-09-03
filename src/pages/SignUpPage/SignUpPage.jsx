@@ -1,7 +1,7 @@
 
 import {Link} from "react-router-dom";
 import "./SignUpPage.scss"
-import {Logo} from "../../shared/ui/SVGComponents/Logo/Logo.jsx";
+import {Logo} from "../../shared/ui/Logo/Logo.jsx";
 import {SignUpForm} from "../../widgets/SignUp/SignUpForm.jsx";
 
 export const SignUpPage = () => {
